@@ -1,0 +1,31 @@
+YOLO11 PPE RESEARCH DOSSIER
+======================================================================
+10. Completeness audit và giới hạn bằng chứng
+======================================================================
+
+10. Completeness audit và giới hạn bằng chứng
+
+Không có ảnh nào được nhúng vào HTML.
+
+68 file văn bản bị bỏ qua do giới hạn dung lượng nhúng.
+
+Không trích xuất được ảnh audit. Có thể HTML gốc không còn hoặc ảnh không được lưu dưới dạng Base64 trong file.
+
+Quan trọng khi viết báo cáo khoa học:
+
+Phân biệt box metrics với mask metrics.
+
+Phân biệt validation với independent test.
+
+Không gộp CB_IRFS/C_IRFS với E1/E2/E3 nếu chưa xác minh quan hệ checkpoint.
+
+E1, E2, E3 là chuỗi fine-tuning nối tiếp; không xem là ablation độc lập.
+
+Không khẳng định oversampling là nguyên nhân duy nhất làm E3 cải thiện.
+
+Kiểm tra lại mọi con số với results.csv và Visual Error Audit gốc.
+
+Không biến giả thuyết về đối tượng nhỏ, che khuất hoặc annotation lỗi thành kết luận đã chứng minh.
+
+HTML này là hồ sơ bằng chứng và tài liệu bàn giao nghiên cứu;
+không phải transcript nguyên văn của toàn bộ cuộc trò chuyện ChatGPT.

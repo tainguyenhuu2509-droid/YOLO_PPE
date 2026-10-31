@@ -1,0 +1,14 @@
+YOLO11 PPE RESEARCH DOSSIER
+======================================================================
+6. Training curves, validation và prediction images
+======================================================================
+
+6. Training curves, validation và prediction images
+
+Các ảnh được giảm kích thước và nén để HTML có thể được tải lên và
+đọc thuận tiện. Hình ảnh gốc không bị chỉnh sửa.
+
+Training plots / validation images:
+0
+
+Không tìm thấy ảnh phù hợp trong nguồn dữ liệu.

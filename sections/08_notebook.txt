@@ -1,0 +1,18 @@
+YOLO11 PPE RESEARCH DOSSIER
+======================================================================
+8. Notebook execution history
+======================================================================
+
+8. Notebook execution history
+
+| Notebook history file | | Size |
+
+| notebook_history/executed_cells.json | | 832.9 KB |
+
+| notebook_history/executed_cells.py | | 785.8 KB |
+
+| notebook_history/history_status.json | | 0.2 KB |
+
+Chỉ những cell và outputs còn tồn tại trong IPython kernel lúc tạo
+evidence pack mới được lưu. Không thể khôi phục toàn bộ frontend outputs
+của các session đã kết thúc.

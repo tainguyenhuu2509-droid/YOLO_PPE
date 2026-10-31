@@ -1,0 +1,52 @@
+YOLO11 PPE RESEARCH DOSSIER
+======================================================================
+1. Tổng quan hồ sơ
+======================================================================
+
+1. Tổng quan hồ sơ
+
+Source
+
+YOLO11_REPORT_EVIDENCE_20261031_012443.zip
+
+Evidence files indexed
+
+5,119
+
+Annotation TXT files
+
+4,768
+
+results.csv
+
+17
+
+Audit text files
+
+3
+
+Audit images embedded
+
+0
+
+Training plots embedded
+
+0
+
+Text evidence sections
+
+194
+
+Mục đích:
+Tài liệu này được tạo để chuyển giao quá trình nghiên cứu YOLO11-seg
+sang một cuộc trò chuyện mới và cung cấp bằng chứng để viết báo cáo
+LaTeX. Đây là HTML độc lập, các ảnh được nhúng trực tiếp và không
+cần truy cập ZIP gốc để xem chúng.
+
+Source archive: YOLO11_REPORT_EVIDENCE_20261031_012443.zip
+
+Kích thước payload ảnh:
+0.00 MB trước khi mã hóa Base64.
+
+Số metric CSV đọc được:
+17

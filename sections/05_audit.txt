@@ -1,0 +1,2696 @@
+YOLO11 PPE RESEARCH DOSSIER
+======================================================================
+5. Visual Error Audit
+======================================================================
+
+5. Visual Error Audit
+
+Các ảnh audit được lấy từ HTML đã xử lý trước đó hoặc từ bản HTML
+gốc còn trong /kaggle/working. Báo cáo văn bản, bảng và nhận xét
+được lưu ở mục tài liệu gốc.
+
+Số ảnh audit đã nhúng:
+0
+
+Không tìm thấy ảnh phù hợp trong nguồn dữ liệu.
+
+Audit text và bảng kết quả
+
+audit_visible_text.txtvisual_error_audit/visual_error_audit_report/audit_visible_text.txt
+YOLO11 Segmentation - Visual Error Audit
+
+YOLO11 Segmentation - Visual Error Audit
+
+C-IRFS vs CB-IRFS | Validation Error Analysis
+
+Evaluation configuration
+
+Dataset: 268 validation images, 3,042 Ground Truth instances
+
+Confidence threshold: 0.40
+
+Mask IoU threshold: 0.50
+
+Classes: 6
+
+Selected examples: top 2 images per model and class
+
+Embedded overlays
+
+24
+
+Models
+
+2
+
+Classes represented
+
+6
+
+Unique image names
+
+16
+
+1. Overall model summary
+
+model
+gt
+pred
+tp
+fp
+fn
+precision
+recall
+f1
+
+CB_IRFS
+3042
+2474
+2201
+273
+841
+0.8897
+0.7235
+0.7980
+
+C_IRFS
+3042
+2519
+2223
+296
+819
+0.8825
+0.7308
+0.7995
+
+2. Per-class error summary
+
+Statistics are calculated from all validation images,
+not only the selected visual examples.
+
+model
+class_id
+class_name
+gt
+pred
+tp
+fp
+fn
+precision
+recall
+f1
+error_count
+
+CB_IRFS
+0
+hat
+829
+759
+699
+60
+130
+0.9209
+0.8432
+0.8804
+190
+
+CB_IRFS
+1
+gloves
+238
+136
+100
+36
+138
+0.7353
+0.4202
+0.5348
+174
+
+CB_IRFS
+2
+mask
+339
+279
+252
+27
+87
+0.9032
+0.7434
+0.8155
+114
+
+CB_IRFS
+3
+pants
+446
+344
+296
+48
+150
+0.8605
+0.6637
+0.7494
+198
+
+CB_IRFS
+4
+shoes
+274
+167
+135
+32
+139
+0.8084
+0.4927
+0.6122
+171
+
+CB_IRFS
+5
+long-sleeved shirt
+916
+789
+719
+70
+197
+0.9113
+0.7849
+0.8434
+267
+
+C_IRFS
+0
+hat
+829
+748
+689
+59
+140
+0.9211
+0.8311
+0.8738
+199
+
+C_IRFS
+1
+gloves
+238
+127
+100
+27
+138
+0.7874
+0.4202
+0.5479
+165
+
+C_IRFS
+2
+mask
+339
+285
+253
+32
+86
+0.8877
+0.7463
+0.8109
+118
+
+C_IRFS
+3
+pants
+446
+352
+295
+57
+151
+0.8381
+0.6614
+0.7393
+208
+
+C_IRFS
+4
+shoes
+274
+199
+145
+54
+129
+0.7286
+0.5292
+0.6131
+183
+
+C_IRFS
+5
+long-sleeved shirt
+916
+808
+741
+67
+175
+0.9171
+0.8090
+0.8596
+242
+
+3. False-positive categories
+
+model
+class_id
+class_name
+fp_type
+count
+
+CB_IRFS
+0
+hat
+duplicate_or_competing_prediction
+5
+
+CB_IRFS
+0
+hat
+no_significant_overlap
+46
+
+CB_IRFS
+0
+hat
+partial_overlap_or_localization
+9
+
+CB_IRFS
+1
+gloves
+duplicate_or_competing_prediction
+5
+
+CB_IRFS
+1
+gloves
+no_significant_overlap
+17
+
+CB_IRFS
+1
+gloves
+partial_overlap_or_localization
+14
+
+CB_IRFS
+2
+mask
+duplicate_or_competing_prediction
+2
+
+CB_IRFS
+2
+mask
+no_significant_overlap
+6
+
+CB_IRFS
+2
+mask
+partial_overlap_or_localization
+19
+
+CB_IRFS
+3
+pants
+duplicate_or_competing_prediction
+13
+
+CB_IRFS
+3
+pants
+no_significant_overlap
+22
+
+CB_IRFS
+3
+pants
+partial_overlap_or_localization
+13
+
+CB_IRFS
+4
+shoes
+duplicate_or_competing_prediction
+8
+
+CB_IRFS
+4
+shoes
+no_significant_overlap
+7
+
+CB_IRFS
+4
+shoes
+partial_overlap_or_localization
+17
+
+CB_IRFS
+5
+long-sleeved shirt
+duplicate_or_competing_prediction
+11
+
+CB_IRFS
+5
+long-sleeved shirt
+no_significant_overlap
+27
+
+CB_IRFS
+5
+long-sleeved shirt
+partial_overlap_or_localization
+32
+
+C_IRFS
+0
+hat
+duplicate_or_competing_prediction
+7
+
+C_IRFS
+0
+hat
+no_significant_overlap
+45
+
+C_IRFS
+0
+hat
+partial_overlap_or_localization
+7
+
+C_IRFS
+1
+gloves
+duplicate_or_competing_prediction
+2
+
+C_IRFS
+1
+gloves
+no_significant_overlap
+14
+
+C_IRFS
+1
+gloves
+partial_overlap_or_localization
+11
+
+C_IRFS
+2
+mask
+duplicate_or_competing_prediction
+4
+
+C_IRFS
+2
+mask
+no_significant_overlap
+6
+
+C_IRFS
+2
+mask
+partial_overlap_or_localization
+22
+
+C_IRFS
+3
+pants
+duplicate_or_competing_prediction
+15
+
+C_IRFS
+3
+pants
+no_significant_overlap
+19
+
+C_IRFS
+3
+pants
+partial_overlap_or_localization
+23
+
+C_IRFS
+4
+shoes
+duplicate_or_competing_prediction
+12
+
+C_IRFS
+4
+shoes
+no_significant_overlap
+25
+
+C_IRFS
+4
+shoes
+partial_overlap_or_localization
+17
+
+C_IRFS
+5
+long-sleeved shirt
+duplicate_or_competing_prediction
+18
+
+C_IRFS
+5
+long-sleeved shirt
+no_significant_overlap
+24
+
+C_IRFS
+5
+long-sleeved shirt
+partial_overlap_or_localization
+25
+
+4. Visual legend
+
+GT matched
+
+GT false negative
+
+Prediction matched
+
+Prediction false positive
+
+5. Selected visual error cases
+
+Each image compares the original image and its overlay.
+
+Click any image to enlarge it.
+
+Use the filters to inspect a specific model, class, split or filename.
+
+All models
+C-IRFS
+CB-IRFS
+All classes
+Hat
+Gloves
+Mask
+Pants
+Shoes
+Long-sleeved shirt
+All splits
+Old
+New
+
+CB_IRFS
+hat
+
+Rank #1
+
+VHung__crowd_20260908_143140__000220.jpg
+
+TP: 6
+FP: 0
+FN: 7
+Errors: 7
+
+Split: New
+Download image
+
+CB_IRFS
+hat
+
+Rank #2
+
+BaoAnh__screen_on_off_20260908_113356__008910.jpg
+
+TP: 1
+FP: 4
+FN: 0
+Errors: 4
+
+Split: Old
+Download image
+
+CB_IRFS
+gloves
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg
+
+TP: 0
+FP: 2
+FN: 4
+Errors: 6
+
+Split: Old
+Download image
+
+CB_IRFS
+gloves
+
+Rank #2
+
+NhatTan__layout_20260908_142002__001430.jpg
+
+TP: 0
+FP: 1
+FN: 5
+Errors: 6
+
+Split: Old
+Download image
+
+CB_IRFS
+mask
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+
+TP: 0
+FP: 2
+FN: 4
+Errors: 6
+
+Split: Old
+Download image
+
+CB_IRFS
+mask
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg
+
+TP: 1
+FP: 2
+FN: 3
+Errors: 5
+
+Split: Old
+Download image
+
+CB_IRFS
+pants
+
+Rank #1
+
+VHung__crowd_20260908_143140__000370.jpg
+
+TP: 0
+FP: 3
+FN: 3
+Errors: 6
+
+Split: New
+Download image
+
+CB_IRFS
+pants
+
+Rank #2
+
+VHung__crowd_20260908_143140__000250.jpg
+
+TP: 2
+FP: 1
+FN: 3
+Errors: 4
+
+Split: New
+Download image
+
+CB_IRFS
+shoes
+
+Rank #1
+
+VHung__phone_20260908_133049__000050.jpg
+
+TP: 1
+FP: 2
+FN: 4
+Errors: 6
+
+Split: New
+Download image
+
+CB_IRFS
+shoes
+
+Rank #2
+
+VHung__phone_20260908_133049__000090.jpg
+
+TP: 0
+FP: 1
+FN: 4
+Errors: 5
+
+Split: New
+Download image
+
+CB_IRFS
+long-sleeved shirt
+
+Rank #1
+
+VHung__crowd_20260908_143140__000070.jpg
+
+TP: 4
+FP: 0
+FN: 28
+Errors: 28
+
+Split: New
+Download image
+
+CB_IRFS
+long-sleeved shirt
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+
+TP: 3
+FP: 2
+FN: 3
+Errors: 5
+
+Split: Old
+Download image
+
+C_IRFS
+hat
+
+Rank #1
+
+VHung__crowd_20260908_143140__000220.jpg
+
+TP: 6
+FP: 0
+FN: 7
+Errors: 7
+
+Split: New
+Download image
+
+C_IRFS
+hat
+
+Rank #2
+
+VHung__phone_20260908_133049__000080.jpg
+
+TP: 3
+FP: 2
+FN: 2
+Errors: 4
+
+Split: New
+Download image
+
+C_IRFS
+gloves
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg
+
+TP: 0
+FP: 2
+FN: 4
+Errors: 6
+
+Split: Old
+Download image
+
+C_IRFS
+gloves
+
+Rank #2
+
+NhatTan__layout_20260908_142002__001430.jpg
+
+TP: 0
+FP: 1
+FN: 5
+Errors: 6
+
+Split: Old
+Download image
+
+C_IRFS
+mask
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg
+
+TP: 1
+FP: 3
+FN: 3
+Errors: 6
+
+Split: Old
+Download image
+
+C_IRFS
+mask
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+
+TP: 2
+FP: 2
+FN: 2
+Errors: 4
+
+Split: Old
+Download image
+
+C_IRFS
+pants
+
+Rank #1
+
+VHung__crowd_20260908_143140__000280.jpg
+
+TP: 1
+FP: 3
+FN: 3
+Errors: 6
+
+Split: New
+Download image
+
+C_IRFS
+pants
+
+Rank #2
+
+VHung__crowd_20260908_143140__000370.jpg
+
+TP: 0
+FP: 2
+FN: 3
+Errors: 5
+
+Split: New
+Download image
+
+C_IRFS
+shoes
+
+Rank #1
+
+VHung__phone_20260908_133049__000050.jpg
+
+TP: 1
+FP: 3
+FN: 4
+Errors: 7
+
+Split: New
+Download image
+
+C_IRFS
+shoes
+
+Rank #2
+
+VHung__phone_20260908_133049__000090.jpg
+
+TP: 1
+FP: 2
+FN: 3
+Errors: 5
+
+Split: New
+Download image
+
+C_IRFS
+long-sleeved shirt
+
+Rank #1
+
+VHung__crowd_20260908_143140__000070.jpg
+
+TP: 4
+FP: 0
+FN: 28
+Errors: 28
+
+Split: New
+Download image
+
+C_IRFS
+long-sleeved shirt
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+
+TP: 3
+FP: 2
+FN: 3
+Errors: 5
+
+Split: Old
+Download image
+
+6. Selected image records
+
+model
+class_id
+class_name
+image
+split
+rank
+gt
+pred
+tp
+fp
+fn
+errors
+
+C_IRFS
+0
+hat
+VHung__crowd_20260908_143140__000220.jpg
+New
+1
+13
+6
+6
+0
+7
+7
+
+C_IRFS
+0
+hat
+VHung__phone_20260908_133049__000080.jpg
+New
+2
+5
+5
+3
+2
+2
+4
+
+C_IRFS
+1
+gloves
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg
+Old
+1
+4
+2
+0
+2
+4
+6
+
+C_IRFS
+1
+gloves
+NhatTan__layout_20260908_142002__001430.jpg
+Old
+2
+5
+1
+0
+1
+5
+6
+
+C_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg
+Old
+1
+4
+4
+1
+3
+3
+6
+
+C_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+Old
+2
+4
+4
+2
+2
+2
+4
+
+C_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000280.jpg
+New
+1
+4
+4
+1
+3
+3
+6
+
+C_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000370.jpg
+New
+2
+3
+2
+0
+2
+3
+5
+
+C_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000050.jpg
+New
+1
+5
+4
+1
+3
+4
+7
+
+C_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000090.jpg
+New
+2
+4
+3
+1
+2
+3
+5
+
+C_IRFS
+5
+long-sleeved shirt
+VHung__crowd_20260908_143140__000070.jpg
+New
+1
+32
+4
+4
+0
+28
+28
+
+C_IRFS
+5
+long-sleeved shirt
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+Old
+2
+6
+5
+3
+2
+3
+5
+
+CB_IRFS
+0
+hat
+VHung__crowd_20260908_143140__000220.jpg
+New
+1
+13
+6
+6
+0
+7
+7
+
+CB_IRFS
+0
+hat
+BaoAnh__screen_on_off_20260908_113356__008910.jpg
+Old
+2
+1
+5
+1
+4
+0
+4
+
+CB_IRFS
+1
+gloves
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg
+Old
+1
+4
+2
+0
+2
+4
+6
+
+CB_IRFS
+1
+gloves
+NhatTan__layout_20260908_142002__001430.jpg
+Old
+2
+5
+1
+0
+1
+5
+6
+
+CB_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+Old
+1
+4
+2
+0
+2
+4
+6
+
+CB_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg
+Old
+2
+4
+3
+1
+2
+3
+5
+
+CB_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000370.jpg
+New
+1
+3
+3
+0
+3
+3
+6
+
+CB_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000250.jpg
+New
+2
+5
+3
+2
+1
+3
+4
+
+CB_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000050.jpg
+New
+1
+5
+3
+1
+2
+4
+6
+
+CB_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000090.jpg
+New
+2
+4
+1
+0
+1
+4
+5
+
+CB_IRFS
+5
+long-sleeved shirt
+VHung__crowd_20260908_143140__000070.jpg
+New
+1
+32
+4
+4
+0
+28
+28
+
+CB_IRFS
+5
+long-sleeved shirt
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+Old
+2
+6
+5
+3
+2
+3
+5
+
+Generated from Cell 17L.
+
+Evaluation: confidence >= 0.40, mask IoU >= 0.50.
+
+All images are embedded within this HTML file.
+
+No Internet connection is required.
+
+FP/FN statistics are validation diagnostics,
+not independent test results.
+
+×
+
+audit_visible_text.txtvisual_error_audit/visual_error_audit_report_compact/audit_visible_text.txt
+YOLO11 Segmentation - Visual Error Audit
+
+YOLO11 Segmentation - Visual Error Audit
+
+C-IRFS vs CB-IRFS | Validation Error Analysis
+
+Evaluation configuration
+
+Dataset: 268 validation images, 3,042 Ground Truth instances
+
+Confidence threshold: 0.40
+
+Mask IoU threshold: 0.50
+
+Classes: 6
+
+Selected examples: top 2 images per model and class
+
+Embedded overlays
+
+24
+
+Models
+
+2
+
+Classes represented
+
+6
+
+Unique image names
+
+16
+
+1. Overall model summary
+
+model
+gt
+pred
+tp
+fp
+fn
+precision
+recall
+f1
+
+CB_IRFS
+3042
+2474
+2201
+273
+841
+0.8897
+0.7235
+0.7980
+
+C_IRFS
+3042
+2519
+2223
+296
+819
+0.8825
+0.7308
+0.7995
+
+2. Per-class error summary
+
+Statistics are calculated from all validation images,
+not only the selected visual examples.
+
+model
+class_id
+class_name
+gt
+pred
+tp
+fp
+fn
+precision
+recall
+f1
+error_count
+
+CB_IRFS
+0
+hat
+829
+759
+699
+60
+130
+0.9209
+0.8432
+0.8804
+190
+
+CB_IRFS
+1
+gloves
+238
+136
+100
+36
+138
+0.7353
+0.4202
+0.5348
+174
+
+CB_IRFS
+2
+mask
+339
+279
+252
+27
+87
+0.9032
+0.7434
+0.8155
+114
+
+CB_IRFS
+3
+pants
+446
+344
+296
+48
+150
+0.8605
+0.6637
+0.7494
+198
+
+CB_IRFS
+4
+shoes
+274
+167
+135
+32
+139
+0.8084
+0.4927
+0.6122
+171
+
+CB_IRFS
+5
+long-sleeved shirt
+916
+789
+719
+70
+197
+0.9113
+0.7849
+0.8434
+267
+
+C_IRFS
+0
+hat
+829
+748
+689
+59
+140
+0.9211
+0.8311
+0.8738
+199
+
+C_IRFS
+1
+gloves
+238
+127
+100
+27
+138
+0.7874
+0.4202
+0.5479
+165
+
+C_IRFS
+2
+mask
+339
+285
+253
+32
+86
+0.8877
+0.7463
+0.8109
+118
+
+C_IRFS
+3
+pants
+446
+352
+295
+57
+151
+0.8381
+0.6614
+0.7393
+208
+
+C_IRFS
+4
+shoes
+274
+199
+145
+54
+129
+0.7286
+0.5292
+0.6131
+183
+
+C_IRFS
+5
+long-sleeved shirt
+916
+808
+741
+67
+175
+0.9171
+0.8090
+0.8596
+242
+
+3. False-positive categories
+
+model
+class_id
+class_name
+fp_type
+count
+
+CB_IRFS
+0
+hat
+duplicate_or_competing_prediction
+5
+
+CB_IRFS
+0
+hat
+no_significant_overlap
+46
+
+CB_IRFS
+0
+hat
+partial_overlap_or_localization
+9
+
+CB_IRFS
+1
+gloves
+duplicate_or_competing_prediction
+5
+
+CB_IRFS
+1
+gloves
+no_significant_overlap
+17
+
+CB_IRFS
+1
+gloves
+partial_overlap_or_localization
+14
+
+CB_IRFS
+2
+mask
+duplicate_or_competing_prediction
+2
+
+CB_IRFS
+2
+mask
+no_significant_overlap
+6
+
+CB_IRFS
+2
+mask
+partial_overlap_or_localization
+19
+
+CB_IRFS
+3
+pants
+duplicate_or_competing_prediction
+13
+
+CB_IRFS
+3
+pants
+no_significant_overlap
+22
+
+CB_IRFS
+3
+pants
+partial_overlap_or_localization
+13
+
+CB_IRFS
+4
+shoes
+duplicate_or_competing_prediction
+8
+
+CB_IRFS
+4
+shoes
+no_significant_overlap
+7
+
+CB_IRFS
+4
+shoes
+partial_overlap_or_localization
+17
+
+CB_IRFS
+5
+long-sleeved shirt
+duplicate_or_competing_prediction
+11
+
+CB_IRFS
+5
+long-sleeved shirt
+no_significant_overlap
+27
+
+CB_IRFS
+5
+long-sleeved shirt
+partial_overlap_or_localization
+32
+
+C_IRFS
+0
+hat
+duplicate_or_competing_prediction
+7
+
+C_IRFS
+0
+hat
+no_significant_overlap
+45
+
+C_IRFS
+0
+hat
+partial_overlap_or_localization
+7
+
+C_IRFS
+1
+gloves
+duplicate_or_competing_prediction
+2
+
+C_IRFS
+1
+gloves
+no_significant_overlap
+14
+
+C_IRFS
+1
+gloves
+partial_overlap_or_localization
+11
+
+C_IRFS
+2
+mask
+duplicate_or_competing_prediction
+4
+
+C_IRFS
+2
+mask
+no_significant_overlap
+6
+
+C_IRFS
+2
+mask
+partial_overlap_or_localization
+22
+
+C_IRFS
+3
+pants
+duplicate_or_competing_prediction
+15
+
+C_IRFS
+3
+pants
+no_significant_overlap
+19
+
+C_IRFS
+3
+pants
+partial_overlap_or_localization
+23
+
+C_IRFS
+4
+shoes
+duplicate_or_competing_prediction
+12
+
+C_IRFS
+4
+shoes
+no_significant_overlap
+25
+
+C_IRFS
+4
+shoes
+partial_overlap_or_localization
+17
+
+C_IRFS
+5
+long-sleeved shirt
+duplicate_or_competing_prediction
+18
+
+C_IRFS
+5
+long-sleeved shirt
+no_significant_overlap
+24
+
+C_IRFS
+5
+long-sleeved shirt
+partial_overlap_or_localization
+25
+
+4. Visual legend
+
+GT matched
+
+GT false negative
+
+Prediction matched
+
+Prediction false positive
+
+5. Selected visual error cases
+
+Each image compares the original image and its overlay.
+
+Click any image to enlarge it.
+
+Use the filters to inspect a specific model, class, split or filename.
+
+All models
+C-IRFS
+CB-IRFS
+All classes
+Hat
+Gloves
+Mask
+Pants
+Shoes
+Long-sleeved shirt
+All splits
+Old
+New
+
+CB_IRFS
+hat
+
+Rank #1
+
+VHung__crowd_20260908_143140__000220.jpg
+
+TP: 6
+FP: 0
+FN: 7
+Errors: 7
+
+Split: New
+Download image
+
+CB_IRFS
+hat
+
+Rank #2
+
+BaoAnh__screen_on_off_20260908_113356__008910.jpg
+
+TP: 1
+FP: 4
+FN: 0
+Errors: 4
+
+Split: Old
+Download image
+
+CB_IRFS
+gloves
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg
+
+TP: 0
+FP: 2
+FN: 4
+Errors: 6
+
+Split: Old
+Download image
+
+CB_IRFS
+gloves
+
+Rank #2
+
+NhatTan__layout_20260908_142002__001430.jpg
+
+TP: 0
+FP: 1
+FN: 5
+Errors: 6
+
+Split: Old
+Download image
+
+CB_IRFS
+mask
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+
+TP: 0
+FP: 2
+FN: 4
+Errors: 6
+
+Split: Old
+Download image
+
+CB_IRFS
+mask
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg
+
+TP: 1
+FP: 2
+FN: 3
+Errors: 5
+
+Split: Old
+Download image
+
+CB_IRFS
+pants
+
+Rank #1
+
+VHung__crowd_20260908_143140__000370.jpg
+
+TP: 0
+FP: 3
+FN: 3
+Errors: 6
+
+Split: New
+Download image
+
+CB_IRFS
+pants
+
+Rank #2
+
+VHung__crowd_20260908_143140__000250.jpg
+
+TP: 2
+FP: 1
+FN: 3
+Errors: 4
+
+Split: New
+Download image
+
+CB_IRFS
+shoes
+
+Rank #1
+
+VHung__phone_20260908_133049__000050.jpg
+
+TP: 1
+FP: 2
+FN: 4
+Errors: 6
+
+Split: New
+Download image
+
+CB_IRFS
+shoes
+
+Rank #2
+
+VHung__phone_20260908_133049__000090.jpg
+
+TP: 0
+FP: 1
+FN: 4
+Errors: 5
+
+Split: New
+Download image
+
+CB_IRFS
+long-sleeved shirt
+
+Rank #1
+
+VHung__crowd_20260908_143140__000070.jpg
+
+TP: 4
+FP: 0
+FN: 28
+Errors: 28
+
+Split: New
+Download image
+
+CB_IRFS
+long-sleeved shirt
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+
+TP: 3
+FP: 2
+FN: 3
+Errors: 5
+
+Split: Old
+Download image
+
+C_IRFS
+hat
+
+Rank #1
+
+VHung__crowd_20260908_143140__000220.jpg
+
+TP: 6
+FP: 0
+FN: 7
+Errors: 7
+
+Split: New
+Download image
+
+C_IRFS
+hat
+
+Rank #2
+
+VHung__phone_20260908_133049__000080.jpg
+
+TP: 3
+FP: 2
+FN: 2
+Errors: 4
+
+Split: New
+Download image
+
+C_IRFS
+gloves
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg
+
+TP: 0
+FP: 2
+FN: 4
+Errors: 6
+
+Split: Old
+Download image
+
+C_IRFS
+gloves
+
+Rank #2
+
+NhatTan__layout_20260908_142002__001430.jpg
+
+TP: 0
+FP: 1
+FN: 5
+Errors: 6
+
+Split: Old
+Download image
+
+C_IRFS
+mask
+
+Rank #1
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg
+
+TP: 1
+FP: 3
+FN: 3
+Errors: 6
+
+Split: Old
+Download image
+
+C_IRFS
+mask
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+
+TP: 2
+FP: 2
+FN: 2
+Errors: 4
+
+Split: Old
+Download image
+
+C_IRFS
+pants
+
+Rank #1
+
+VHung__crowd_20260908_143140__000280.jpg
+
+TP: 1
+FP: 3
+FN: 3
+Errors: 6
+
+Split: New
+Download image
+
+C_IRFS
+pants
+
+Rank #2
+
+VHung__crowd_20260908_143140__000370.jpg
+
+TP: 0
+FP: 2
+FN: 3
+Errors: 5
+
+Split: New
+Download image
+
+C_IRFS
+shoes
+
+Rank #1
+
+VHung__phone_20260908_133049__000050.jpg
+
+TP: 1
+FP: 3
+FN: 4
+Errors: 7
+
+Split: New
+Download image
+
+C_IRFS
+shoes
+
+Rank #2
+
+VHung__phone_20260908_133049__000090.jpg
+
+TP: 1
+FP: 2
+FN: 3
+Errors: 5
+
+Split: New
+Download image
+
+C_IRFS
+long-sleeved shirt
+
+Rank #1
+
+VHung__crowd_20260908_143140__000070.jpg
+
+TP: 4
+FP: 0
+FN: 28
+Errors: 28
+
+Split: New
+Download image
+
+C_IRFS
+long-sleeved shirt
+
+Rank #2
+
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+
+TP: 3
+FP: 2
+FN: 3
+Errors: 5
+
+Split: Old
+Download image
+
+6. Selected image records
+
+model
+class_id
+class_name
+image
+split
+rank
+gt
+pred
+tp
+fp
+fn
+errors
+
+C_IRFS
+0
+hat
+VHung__crowd_20260908_143140__000220.jpg
+New
+1
+13
+6
+6
+0
+7
+7
+
+C_IRFS
+0
+hat
+VHung__phone_20260908_133049__000080.jpg
+New
+2
+5
+5
+3
+2
+2
+4
+
+C_IRFS
+1
+gloves
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg
+Old
+1
+4
+2
+0
+2
+4
+6
+
+C_IRFS
+1
+gloves
+NhatTan__layout_20260908_142002__001430.jpg
+Old
+2
+5
+1
+0
+1
+5
+6
+
+C_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg
+Old
+1
+4
+4
+1
+3
+3
+6
+
+C_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+Old
+2
+4
+4
+2
+2
+2
+4
+
+C_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000280.jpg
+New
+1
+4
+4
+1
+3
+3
+6
+
+C_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000370.jpg
+New
+2
+3
+2
+0
+2
+3
+5
+
+C_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000050.jpg
+New
+1
+5
+4
+1
+3
+4
+7
+
+C_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000090.jpg
+New
+2
+4
+3
+1
+2
+3
+5
+
+C_IRFS
+5
+long-sleeved shirt
+VHung__crowd_20260908_143140__000070.jpg
+New
+1
+32
+4
+4
+0
+28
+28
+
+C_IRFS
+5
+long-sleeved shirt
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+Old
+2
+6
+5
+3
+2
+3
+5
+
+CB_IRFS
+0
+hat
+VHung__crowd_20260908_143140__000220.jpg
+New
+1
+13
+6
+6
+0
+7
+7
+
+CB_IRFS
+0
+hat
+BaoAnh__screen_on_off_20260908_113356__008910.jpg
+Old
+2
+1
+5
+1
+4
+0
+4
+
+CB_IRFS
+1
+gloves
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg
+Old
+1
+4
+2
+0
+2
+4
+6
+
+CB_IRFS
+1
+gloves
+NhatTan__layout_20260908_142002__001430.jpg
+Old
+2
+5
+1
+0
+1
+5
+6
+
+CB_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+Old
+1
+4
+2
+0
+2
+4
+6
+
+CB_IRFS
+2
+mask
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg
+Old
+2
+4
+3
+1
+2
+3
+5
+
+CB_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000370.jpg
+New
+1
+3
+3
+0
+3
+3
+6
+
+CB_IRFS
+3
+pants
+VHung__crowd_20260908_143140__000250.jpg
+New
+2
+5
+3
+2
+1
+3
+4
+
+CB_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000050.jpg
+New
+1
+5
+3
+1
+2
+4
+6
+
+CB_IRFS
+4
+shoes
+VHung__phone_20260908_133049__000090.jpg
+New
+2
+4
+1
+0
+1
+4
+5
+
+CB_IRFS
+5
+long-sleeved shirt
+VHung__crowd_20260908_143140__000070.jpg
+New
+1
+32
+4
+4
+0
+28
+28
+
+CB_IRFS
+5
+long-sleeved shirt
+QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+Old
+2
+6
+5
+3
+2
+3
+5
+
+Generated from Cell 17L.
+
+Evaluation: confidence >= 0.40, mask IoU >= 0.50.
+
+All images are embedded within this HTML file.
+
+No Internet connection is required.
+
+FP/FN statistics are validation diagnostics,
+not independent test results.
+
+×
+
+visual_error_audit_inventory.jsonvisual_error_audit_inventory.json
+[
+{
+"source": "/kaggle/working/visual_error_audit_report.html",
+"size_bytes": 22820271,
+"images_saved": [
+"001_VHung__crowd_20260908_143140__000220.jpg",
+"002_BaoAnh__screen_on_off_20260908_113356__008910.jpg",
+"003_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg",
+"004_NhatTan__layout_20260908_142002__001430.jpg",
+"005_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg",
+"006_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg",
+"007_VHung__crowd_20260908_143140__000370.jpg",
+"008_VHung__crowd_20260908_143140__000250.jpg",
+"009_VHung__phone_20260908_133049__000050.jpg",
+"010_VHung__phone_20260908_133049__000090.jpg",
+"011_VHung__crowd_20260908_143140__000070.jpg",
+"012_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg",
+"013_VHung__crowd_20260908_143140__000220.jpg",
+"014_VHung__phone_20260908_133049__000080.jpg",
+"015_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg",
+"016_NhatTan__layout_20260908_142002__001430.jpg",
+"017_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg",
+"018_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg",
+"019_VHung__crowd_20260908_143140__000280.jpg",
+"020_VHung__crowd_20260908_143140__000370.jpg",
+"021_VHung__phone_20260908_133049__000050.jpg",
+"022_VHung__phone_20260908_133049__000090.jpg",
+"023_VHung__crowd_20260908_143140__000070.jpg",
+"024_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg"
+],
+"status": "processed",
+"image_tags": 25,
+"unique_images_saved": 24,
+"visible_text_file": "audit_visible_text.txt",
+"sanitized_html": "audit_sanitized.html"
+},
+{
+"source": "/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/visual_error_audit_report.html",
+"size_bytes": 45577643,
+"images_saved": [],
+"status": "processed",
+"image_tags": 25,
+"unique_images_saved": 0,
+"visible_text_file": "audit_visible_text.txt",
+"sanitized_html": "audit_sanitized.html"
+},
+{
+"source": "/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/visual_error_audit_report_compact.html",
+"size_bytes": 22820271,
+"images_saved": [],
+"status": "processed",
+"image_tags": 25,
+"unique_images_saved": 0,
+"visible_text_file": "audit_visible_text.txt",
+"sanitized_html": "audit_sanitized.html"
+}
+]
+rfs_irfs_class_exposure.csvworking_evidence/YOLO11_seg_expanded/kaggle_outputs/sampling_audit/rfs_irfs_class_exposure.csv
+method,class_name,image_count,instance_count,class_repeat_factor,image_exposures
+RFS,hat,918,4352,1.0,1096
+RFS,gloves,520,1415,1.192282878153696,637
+RFS,mask,705,1292,1.0239680846090236,843
+RFS,pants,759,1682,1.0,911
+RFS,shoes,465,1152,1.2608241032574046,586
+RFS,long-sleeved shirt,921,4048,1.0,1099
+IRFS,hat,918,4352,1.0,1058
+IRFS,gloves,520,1415,1.120371766688834,606
+IRFS,mask,705,1292,1.062158170740607,810
+IRFS,pants,759,1682,1.0,880
+IRFS,shoes,465,1152,1.2129020887881081,558
+IRFS,long-sleeved shirt,921,4048,1.0,1061
+
+class_error_summary.csvworking_evidence/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/class_error_summary.csv
+model,class_id,class_name,gt,pred,tp,fp,fn,precision,recall,f1,error_count
+CB_IRFS,0,hat,829,759,699,60,130,0.9209486166007905,0.8431845597104946,0.8803526448362721,190
+CB_IRFS,1,gloves,238,136,100,36,138,0.7352941176470589,0.42016806722689076,0.5347593582887701,174
+CB_IRFS,2,mask,339,279,252,27,87,0.9032258064516129,0.7433628318584071,0.8155339805825244,114
+CB_IRFS,3,pants,446,344,296,48,150,0.8604651162790697,0.6636771300448431,0.7493670886075949,198
+CB_IRFS,4,shoes,274,167,135,32,139,0.8083832335329342,0.4927007299270073,0.6122448979591838,171
+CB_IRFS,5,long-sleeved shirt,916,789,719,70,197,0.9112801013941698,0.7849344978165939,0.8434017595307918,267
+C_IRFS,0,hat,829,748,689,59,140,0.9211229946524064,0.8311218335343787,0.8738110336081167,199
+C_IRFS,1,gloves,238,127,100,27,138,0.7874015748031497,0.42016806722689076,0.5479452054794521,165
+C_IRFS,2,mask,339,285,253,32,86,0.887719298245614,0.7463126843657817,0.8108974358974359,118
+C_IRFS,3,pants,446,352,295,57,151,0.8380681818181818,0.6614349775784754,0.7393483709273183,208
+C_IRFS,4,shoes,274,199,145,54,129,0.7286432160804021,0.5291970802919708,0.613107822410148,183
+C_IRFS,5,long-sleeved shirt,916,808,741,67,175,0.9170792079207921,0.8089519650655022,0.8596287703016241,242
+
+visual_error_audit_notes.txtworking_evidence/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/visual_error_audit_notes.txt
+YOLO11 SEGMENTATION - VISUAL ERROR AUDIT
+Operating point: confidence >= 0.40, mask IoU >= 0.50
+Dataset: 268 validation images, 3,042 GT instances
+
+OVERALL SUMMARY
+
+CB_IRFS
+GT=3042, Pred=2474, TP=2201, FP=273, FN=841
+Precision=0.8897, Recall=0.7235, F1=0.7980
+
+C_IRFS
+GT=3042, Pred=2519, TP=2223, FP=296, FN=819
+Precision=0.8825, Recall=0.7308, F1=0.7995
+
+PER-CLASS SUMMARY
+
+CB_IRFS | hat
+GT=829, TP=699, FP=60, FN=130, F1=0.8804
+
+CB_IRFS | gloves
+GT=238, TP=100, FP=36, FN=138, F1=0.5348
+
+CB_IRFS | mask
+GT=339, TP=252, FP=27, FN=87, F1=0.8155
+
+CB_IRFS | pants
+GT=446, TP=296, FP=48, FN=150, F1=0.7494
+
+CB_IRFS | shoes
+GT=274, TP=135, FP=32, FN=139, F1=0.6122
+
+CB_IRFS | long-sleeved shirt
+GT=916, TP=719, FP=70, FN=197, F1=0.8434
+
+C_IRFS | hat
+GT=829, TP=689, FP=59, FN=140, F1=0.8738
+
+C_IRFS | gloves
+GT=238, TP=100, FP=27, FN=138, F1=0.5479
+
+C_IRFS | mask
+GT=339, TP=253, FP=32, FN=86, F1=0.8109
+
+C_IRFS | pants
+GT=446, TP=295, FP=57, FN=151, F1=0.7393
+
+C_IRFS | shoes
+GT=274, TP=145, FP=54, FN=129, F1=0.6131
+
+C_IRFS | long-sleeved shirt
+GT=916, TP=741, FP=67, FN=175, F1=0.8596
+
+SELECTED VISUAL CASES
+
+C_IRFS | hat | VHung__crowd_20260908_143140__000220.jpg
+GT=13, Pred=6, TP=6, FP=0, FN=7
+
+C_IRFS | hat | VHung__phone_20260908_133049__000080.jpg
+GT=5, Pred=5, TP=3, FP=2, FN=2
+
+C_IRFS | gloves | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg
+GT=4, Pred=2, TP=0, FP=2, FN=4
+
+C_IRFS | gloves | NhatTan__layout_20260908_142002__001430.jpg
+GT=5, Pred=1, TP=0, FP=1, FN=5
+
+C_IRFS | mask | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg
+GT=4, Pred=4, TP=1, FP=3, FN=3
+
+C_IRFS | mask | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+GT=4, Pred=4, TP=2, FP=2, FN=2
+
+C_IRFS | pants | VHung__crowd_20260908_143140__000280.jpg
+GT=4, Pred=4, TP=1, FP=3, FN=3
+
+C_IRFS | pants | VHung__crowd_20260908_143140__000370.jpg
+GT=3, Pred=2, TP=0, FP=2, FN=3
+
+C_IRFS | shoes | VHung__phone_20260908_133049__000050.jpg
+GT=5, Pred=4, TP=1, FP=3, FN=4
+
+C_IRFS | shoes | VHung__phone_20260908_133049__000090.jpg
+GT=4, Pred=3, TP=1, FP=2, FN=3
+
+C_IRFS | long-sleeved shirt | VHung__crowd_20260908_143140__000070.jpg
+GT=32, Pred=4, TP=4, FP=0, FN=28
+
+C_IRFS | long-sleeved shirt | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+GT=6, Pred=5, TP=3, FP=2, FN=3
+
+CB_IRFS | hat | VHung__crowd_20260908_143140__000220.jpg
+GT=13, Pred=6, TP=6, FP=0, FN=7
+
+CB_IRFS | hat | BaoAnh__screen_on_off_20260908_113356__008910.jpg
+GT=1, Pred=5, TP=1, FP=4, FN=0
+
+CB_IRFS | gloves | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg
+GT=4, Pred=2, TP=0, FP=2, FN=4
+
+CB_IRFS | gloves | NhatTan__layout_20260908_142002__001430.jpg
+GT=5, Pred=1, TP=0, FP=1, FN=5
+
+CB_IRFS | mask | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg
+GT=4, Pred=2, TP=0, FP=2, FN=4
+
+CB_IRFS | mask | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg
+GT=4, Pred=3, TP=1, FP=2, FN=3
+
+CB_IRFS | pants | VHung__crowd_20260908_143140__000370.jpg
+GT=3, Pred=3, TP=0, FP=3, FN=3
+
+CB_IRFS | pants | VHung__crowd_20260908_143140__000250.jpg
+GT=5, Pred=3, TP=2, FP=1, FN=3
+
+CB_IRFS | shoes | VHung__phone_20260908_133049__000050.jpg
+GT=5, Pred=3, TP=1, FP=2, FN=4
+
+CB_IRFS | shoes | VHung__phone_20260908_133049__000090.jpg
+GT=4, Pred=1, TP=0, FP=1, FN=4
+
+CB_IRFS | long-sleeved shirt | VHung__crowd_20260908_143140__000070.jpg
+GT=32, Pred=4, TP=4, FP=0, FN=28
+
+CB_IRFS | long-sleeved shirt | QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg
+GT=6, Pred=5, TP=3, FP=2, FN=3
+
+INTERPRETATION
+FP/FN statistics use confidence=0.40 and mask IoU=0.50.
+These are validation diagnostics, not independent test results.
+
+visual_overlay_manifest_with_split.csvworking_evidence/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/visual_overlay_manifest_with_split.csv
+model,class_id,class_name,image,rank,tp,fp,fn,output_file,split
+C_IRFS,0,hat,VHung__crowd_20260908_143140__000220.jpg,1,6,0,7,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class0_rank1_VHung__crowd_20260908_143140__000220.jpg.jpg,New
+C_IRFS,0,hat,VHung__phone_20260908_133049__000080.jpg,2,3,2,2,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class0_rank2_VHung__phone_20260908_133049__000080.jpg.jpg,New
+C_IRFS,1,gloves,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg,1,0,2,4,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class1_rank1_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg.jpg,Old
+C_IRFS,1,gloves,NhatTan__layout_20260908_142002__001430.jpg,2,0,1,5,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class1_rank2_NhatTan__layout_20260908_142002__001430.jpg.jpg,Old
+C_IRFS,2,mask,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg,1,1,3,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class2_rank1_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg.jpg,Old
+C_IRFS,2,mask,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg,2,2,2,2,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class2_rank2_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg.jpg,Old
+C_IRFS,3,pants,VHung__crowd_20260908_143140__000280.jpg,1,1,3,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class3_rank1_VHung__crowd_20260908_143140__000280.jpg.jpg,New
+C_IRFS,3,pants,VHung__crowd_20260908_143140__000370.jpg,2,0,2,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class3_rank2_VHung__crowd_20260908_143140__000370.jpg.jpg,New
+C_IRFS,4,shoes,VHung__phone_20260908_133049__000050.jpg,1,1,3,4,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class4_rank1_VHung__phone_20260908_133049__000050.jpg.jpg,New
+C_IRFS,4,shoes,VHung__phone_20260908_133049__000090.jpg,2,1,2,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class4_rank2_VHung__phone_20260908_133049__000090.jpg.jpg,New
+C_IRFS,5,long-sleeved shirt,VHung__crowd_20260908_143140__000070.jpg,1,4,0,28,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class5_rank1_VHung__crowd_20260908_143140__000070.jpg.jpg,New
+C_IRFS,5,long-sleeved shirt,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg,2,3,2,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/C_IRFS_class5_rank2_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg.jpg,Old
+CB_IRFS,0,hat,VHung__crowd_20260908_143140__000220.jpg,1,6,0,7,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class0_rank1_VHung__crowd_20260908_143140__000220.jpg.jpg,New
+CB_IRFS,0,hat,BaoAnh__screen_on_off_20260908_113356__008910.jpg,2,1,4,0,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class0_rank2_BaoAnh__screen_on_off_20260908_113356__008910.jpg.jpg,Old
+CB_IRFS,1,gloves,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg,1,0,2,4,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class1_rank1_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg.jpg,Old
+CB_IRFS,1,gloves,NhatTan__layout_20260908_142002__001430.jpg,2,0,1,5,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class1_rank2_NhatTan__layout_20260908_142002__001430.jpg.jpg,Old
+CB_IRFS,2,mask,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg,1,0,2,4,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class2_rank1_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg.jpg,Old
+CB_IRFS,2,mask,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg,2,1,2,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class2_rank2_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg.jpg,Old
+CB_IRFS,3,pants,VHung__crowd_20260908_143140__000370.jpg,1,0,3,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class3_rank1_VHung__crowd_20260908_143140__000370.jpg.jpg,New
+CB_IRFS,3,pants,VHung__crowd_20260908_143140__000250.jpg,2,2,1,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class3_rank2_VHung__crowd_20260908_143140__000250.jpg.jpg,New
+CB_IRFS,4,shoes,VHung__phone_20260908_133049__000050.jpg,1,1,2,4,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class4_rank1_VHung__phone_20260908_133049__000050.jpg.jpg,New
+CB_IRFS,4,shoes,VHung__phone_20260908_133049__000090.jpg,2,0,1,4,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class4_rank2_VHung__phone_20260908_133049__000090.jpg.jpg,New
+CB_IRFS,5,long-sleeved shirt,VHung__crowd_20260908_143140__000070.jpg,1,4,0,28,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class5_rank1_VHung__crowd_20260908_143140__000070.jpg.jpg,New
+CB_IRFS,5,long-sleeved shirt,QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg,2,3,2,3,/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/error_visualizations/CB_IRFS_class5_rank2_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg.jpg,Old
+
+visual_audit_fp_breakdown.csvworking_evidence/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/visual_audit_fp_breakdown.csv
+model,class_id,class_name,fp_type,count
+CB_IRFS,0,hat,duplicate_or_competing_prediction,5
+CB_IRFS,0,hat,no_significant_overlap,46
+CB_IRFS,0,hat,partial_overlap_or_localization,9
+CB_IRFS,1,gloves,duplicate_or_competing_prediction,5
+CB_IRFS,1,gloves,no_significant_overlap,17
+CB_IRFS,1,gloves,partial_overlap_or_localization,14
+CB_IRFS,2,mask,duplicate_or_competing_prediction,2
+CB_IRFS,2,mask,no_significant_overlap,6
+CB_IRFS,2,mask,partial_overlap_or_localization,19
+CB_IRFS,3,pants,duplicate_or_competing_prediction,13
+CB_IRFS,3,pants,no_significant_overlap,22
+CB_IRFS,3,pants,partial_overlap_or_localization,13
+CB_IRFS,4,shoes,duplicate_or_competing_prediction,8
+CB_IRFS,4,shoes,no_significant_overlap,7
+CB_IRFS,4,shoes,partial_overlap_or_localization,17
+CB_IRFS,5,long-sleeved shirt,duplicate_or_competing_prediction,11
+CB_IRFS,5,long-sleeved shirt,no_significant_overlap,27
+CB_IRFS,5,long-sleeved shirt,partial_overlap_or_localization,32
+C_IRFS,0,hat,duplicate_or_competing_prediction,7
+C_IRFS,0,hat,no_significant_overlap,45
+C_IRFS,0,hat,partial_overlap_or_localization,7
+C_IRFS,1,gloves,duplicate_or_competing_prediction,2
+C_IRFS,1,gloves,no_significant_overlap,14
+C_IRFS,1,gloves,partial_overlap_or_localization,11
+C_IRFS,2,mask,duplicate_or_competing_prediction,4
+C_IRFS,2,mask,no_significant_overlap,6
+C_IRFS,2,mask,partial_overlap_or_localization,22
+C_IRFS,3,pants,duplicate_or_competing_prediction,15
+C_IRFS,3,pants,no_significant_overlap,19
+C_IRFS,3,pants,partial_overlap_or_localization,23
+C_IRFS,4,shoes,duplicate_or_competing_prediction,12
+C_IRFS,4,shoes,no_significant_overlap,25
+C_IRFS,4,shoes,partial_overlap_or_localization,17
+C_IRFS,5,long-sleeved shirt,duplicate_or_competing_prediction,18
+C_IRFS,5,long-sleeved shirt,no_significant_overlap,24
+C_IRFS,5,long-sleeved shirt,partial_overlap_or_localization,25
