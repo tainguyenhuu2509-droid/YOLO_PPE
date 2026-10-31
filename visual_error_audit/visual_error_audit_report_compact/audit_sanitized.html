@@ -1,0 +1,2999 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>YOLO11 Segmentation - Visual Error Audit</title>
+
+<style>
+
+:root {
+    --background: #f4f6f9;
+    --surface: #ffffff;
+    --text: #202938;
+    --muted: #64748b;
+    --border: #dce2ea;
+    --primary: #315b91;
+    --green: #16834b;
+    --red: #cf3434;
+    --orange: #c47712;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.55;
+}
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 26px;
+}
+
+h1 {
+    margin-bottom: 5px;
+    font-size: 30px;
+}
+
+h2 {
+    margin-top: 35px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 9px;
+}
+
+.subtitle {
+    color: var(--muted);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+}
+
+.metric-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 17px;
+}
+
+.metric-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.metric-value {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.section-note {
+    color: var(--muted);
+    background: white;
+    padding: 13px 16px;
+    border-left: 4px solid var(--primary);
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    background: white;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    margin: 15px 0;
+}
+
+.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+    min-width: 700px;
+}
+
+.data-table th,
+.data-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 10px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.data-table th {
+    background: #edf2f8;
+    position: sticky;
+    top: 0;
+}
+
+.data-table td:first-child,
+.data-table th:first-child {
+    text-align: left;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.filters input,
+.filters select {
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    min-width: 160px;
+    background: white;
+    font-size: 14px;
+}
+
+.case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.case-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.card-header {
+    padding: 14px 15px 5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.model-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #234b7d;
+    background: #e4edf8;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+.class-tag {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 12px;
+    color: #46566b;
+    background: #edf0f4;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+.rank-tag {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.case-card h3 {
+    font-size: 14px;
+    padding: 0 15px;
+    overflow-wrap: anywhere;
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 0 15px 12px;
+}
+
+.stat {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: #f1f3f6;
+}
+
+.stat.tp {
+    color: var(--green);
+}
+
+.stat.fp {
+    color: var(--orange);
+}
+
+.stat.fn {
+    color: var(--red);
+}
+
+.stat.total {
+    font-weight: bold;
+}
+
+.image-container {
+    background: #151a22;
+    padding: 8px;
+}
+
+.audit-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+    border-radius: 3px;
+}
+
+.card-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.download-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
+
+.legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 14px;
+    border-radius: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+}
+
+.color-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+#resultCount {
+    color: var(--muted);
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0,0,0,0.94);
+    padding: 25px;
+    overflow: auto;
+}
+
+.modal-content {
+    display: block;
+    max-width: 96%;
+    max-height: 90vh;
+    object-fit: contain;
+    margin: 30px auto;
+    cursor: zoom-out;
+}
+
+.modal-caption {
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.modal-close {
+    position: fixed;
+    top: 14px;
+    right: 25px;
+    color: white;
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+footer {
+    margin: 50px 0 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+@media(max-width: 600px) {
+    .container {
+        padding: 12px;
+    }
+
+    .case-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>YOLO11 Segmentation - Visual Error Audit</h1>
+
+        <div class="subtitle">
+            C-IRFS vs CB-IRFS | Validation Error Analysis
+        </div>
+
+    </header>
+
+
+    <div class="section-note">
+
+        <strong>Evaluation configuration</strong><br>
+
+        Dataset: 268 validation images, 3,042 Ground Truth instances<br>
+
+        Confidence threshold: 0.40<br>
+
+        Mask IoU threshold: 0.50<br>
+
+        Classes: 6<br>
+
+        Selected examples: top 2 images per model and class
+
+    </div>
+
+
+    <div class="metrics-grid">
+
+        <div class="metric-box">
+
+            <div class="metric-label">Embedded overlays</div>
+
+            <div class="metric-value">24</div>
+
+        </div>
+
+        <div class="metric-box">
+
+            <div class="metric-label">Models</div>
+
+            <div class="metric-value">2</div>
+
+        </div>
+
+        <div class="metric-box">
+
+            <div class="metric-label">Classes represented</div>
+
+            <div class="metric-value">6</div>
+
+        </div>
+
+        <div class="metric-box">
+
+            <div class="metric-label">Unique image names</div>
+
+            <div class="metric-value">16</div>
+
+        </div>
+
+    </div>
+
+
+    <h2>1. Overall model summary</h2>
+
+    <div class="table-wrap">
+        <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>gt</th>
+      <th>pred</th>
+      <th>tp</th>
+      <th>fp</th>
+      <th>fn</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3042</td>
+      <td>2474</td>
+      <td>2201</td>
+      <td>273</td>
+      <td>841</td>
+      <td>0.8897</td>
+      <td>0.7235</td>
+      <td>0.7980</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3042</td>
+      <td>2519</td>
+      <td>2223</td>
+      <td>296</td>
+      <td>819</td>
+      <td>0.8825</td>
+      <td>0.7308</td>
+      <td>0.7995</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+
+    <h2>2. Per-class error summary</h2>
+
+    <div class="section-note">
+        Statistics are calculated from all validation images,
+        not only the selected visual examples.
+    </div>
+
+    <div class="table-wrap">
+        <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>class_id</th>
+      <th>class_name</th>
+      <th>gt</th>
+      <th>pred</th>
+      <th>tp</th>
+      <th>fp</th>
+      <th>fn</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>error_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>829</td>
+      <td>759</td>
+      <td>699</td>
+      <td>60</td>
+      <td>130</td>
+      <td>0.9209</td>
+      <td>0.8432</td>
+      <td>0.8804</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>238</td>
+      <td>136</td>
+      <td>100</td>
+      <td>36</td>
+      <td>138</td>
+      <td>0.7353</td>
+      <td>0.4202</td>
+      <td>0.5348</td>
+      <td>174</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>339</td>
+      <td>279</td>
+      <td>252</td>
+      <td>27</td>
+      <td>87</td>
+      <td>0.9032</td>
+      <td>0.7434</td>
+      <td>0.8155</td>
+      <td>114</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>446</td>
+      <td>344</td>
+      <td>296</td>
+      <td>48</td>
+      <td>150</td>
+      <td>0.8605</td>
+      <td>0.6637</td>
+      <td>0.7494</td>
+      <td>198</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>274</td>
+      <td>167</td>
+      <td>135</td>
+      <td>32</td>
+      <td>139</td>
+      <td>0.8084</td>
+      <td>0.4927</td>
+      <td>0.6122</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>916</td>
+      <td>789</td>
+      <td>719</td>
+      <td>70</td>
+      <td>197</td>
+      <td>0.9113</td>
+      <td>0.7849</td>
+      <td>0.8434</td>
+      <td>267</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>829</td>
+      <td>748</td>
+      <td>689</td>
+      <td>59</td>
+      <td>140</td>
+      <td>0.9211</td>
+      <td>0.8311</td>
+      <td>0.8738</td>
+      <td>199</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>238</td>
+      <td>127</td>
+      <td>100</td>
+      <td>27</td>
+      <td>138</td>
+      <td>0.7874</td>
+      <td>0.4202</td>
+      <td>0.5479</td>
+      <td>165</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>339</td>
+      <td>285</td>
+      <td>253</td>
+      <td>32</td>
+      <td>86</td>
+      <td>0.8877</td>
+      <td>0.7463</td>
+      <td>0.8109</td>
+      <td>118</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>446</td>
+      <td>352</td>
+      <td>295</td>
+      <td>57</td>
+      <td>151</td>
+      <td>0.8381</td>
+      <td>0.6614</td>
+      <td>0.7393</td>
+      <td>208</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>274</td>
+      <td>199</td>
+      <td>145</td>
+      <td>54</td>
+      <td>129</td>
+      <td>0.7286</td>
+      <td>0.5292</td>
+      <td>0.6131</td>
+      <td>183</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>916</td>
+      <td>808</td>
+      <td>741</td>
+      <td>67</td>
+      <td>175</td>
+      <td>0.9171</td>
+      <td>0.8090</td>
+      <td>0.8596</td>
+      <td>242</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+
+    <h2>3. False-positive categories</h2>
+
+    <div class="table-wrap">
+        <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>class_id</th>
+      <th>class_name</th>
+      <th>fp_type</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>no_significant_overlap</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>partial_overlap_or_localization</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>no_significant_overlap</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>partial_overlap_or_localization</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>no_significant_overlap</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>partial_overlap_or_localization</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>no_significant_overlap</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>partial_overlap_or_localization</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>no_significant_overlap</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>partial_overlap_or_localization</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>no_significant_overlap</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>partial_overlap_or_localization</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>no_significant_overlap</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>partial_overlap_or_localization</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>no_significant_overlap</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>partial_overlap_or_localization</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>no_significant_overlap</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>partial_overlap_or_localization</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>no_significant_overlap</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>partial_overlap_or_localization</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>no_significant_overlap</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>partial_overlap_or_localization</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>duplicate_or_competing_prediction</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>no_significant_overlap</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>partial_overlap_or_localization</td>
+      <td>25</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+
+    <h2>4. Visual legend</h2>
+
+    <div class="legend">
+
+        <div class="legend-item">
+            <div class="color-box" style="background:#00C800"></div>
+            GT matched
+        </div>
+
+        <div class="legend-item">
+            <div class="color-box" style="background:#FF0000"></div>
+            GT false negative
+        </div>
+
+        <div class="legend-item">
+            <div class="color-box" style="background:#00FFFF"></div>
+            Prediction matched
+        </div>
+
+        <div class="legend-item">
+            <div class="color-box" style="background:#FFA500"></div>
+            Prediction false positive
+        </div>
+
+    </div>
+
+
+    <h2>5. Selected visual error cases</h2>
+
+    <div class="section-note">
+
+        Each image compares the original image and its overlay.<br>
+
+        Click any image to enlarge it.<br>
+
+        Use the filters to inspect a specific model, class, split or filename.
+
+    </div>
+
+
+    <div class="filters">
+
+        <select id="modelFilter">
+            <option value="all">All models</option>
+            <option value="C_IRFS">C-IRFS</option>
+            <option value="CB_IRFS">CB-IRFS</option>
+        </select>
+
+
+        <select id="classFilter">
+            <option value="all">All classes</option>
+            <option value="0">Hat</option>
+            <option value="1">Gloves</option>
+            <option value="2">Mask</option>
+            <option value="3">Pants</option>
+            <option value="4">Shoes</option>
+            <option value="5">Long-sleeved shirt</option>
+        </select>
+
+
+        <select id="splitFilter">
+            <option value="all">All splits</option>
+            <option value="Old">Old</option>
+            <option value="New">New</option>
+        </select>
+
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search image filename..."
+        />
+
+    </div>
+
+
+    <div id="resultCount"></div>
+
+
+    <div class="case-grid" id="caseGrid">
+        
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="0"
+        data-split="New"
+        data-search="cb_irfs hat vhung__crowd_20260908_143140__000220.jpg new"
+        data-errors="7"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">hat</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000220.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 6</span>
+
+            <span class="stat fp">FP: 0</span>
+
+            <span class="stat fn">FN: 7</span>
+
+            <span class="stat total">
+                Errors: 7
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000220.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="CB_IRFS_class0_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="0"
+        data-split="Old"
+        data-search="cb_irfs hat baoanh__screen_on_off_20260908_113356__008910.jpg old"
+        data-errors="4"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">hat</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>BaoAnh__screen_on_off_20260908_113356__008910.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 4</span>
+
+            <span class="stat fn">FN: 0</span>
+
+            <span class="stat total">
+                Errors: 4
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="BaoAnh__screen_on_off_20260908_113356__008910.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="CB_IRFS_class0_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="1"
+        data-split="Old"
+        data-search="cb_irfs gloves quochung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg old"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">gloves</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 4</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="CB_IRFS_class1_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="1"
+        data-split="Old"
+        data-search="cb_irfs gloves nhattan__layout_20260908_142002__001430.jpg old"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">gloves</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>NhatTan__layout_20260908_142002__001430.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 1</span>
+
+            <span class="stat fn">FN: 5</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="NhatTan__layout_20260908_142002__001430.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="CB_IRFS_class1_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="2"
+        data-split="Old"
+        data-search="cb_irfs mask quochung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg old"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">mask</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 4</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="CB_IRFS_class2_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="2"
+        data-split="Old"
+        data-search="cb_irfs mask quochung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg old"
+        data-errors="5"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">mask</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 5
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="CB_IRFS_class2_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="3"
+        data-split="New"
+        data-search="cb_irfs pants vhung__crowd_20260908_143140__000370.jpg new"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">pants</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000370.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 3</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000370.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="CB_IRFS_class3_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="3"
+        data-split="New"
+        data-search="cb_irfs pants vhung__crowd_20260908_143140__000250.jpg new"
+        data-errors="4"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">pants</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000250.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 2</span>
+
+            <span class="stat fp">FP: 1</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 4
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000250.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="CB_IRFS_class3_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="4"
+        data-split="New"
+        data-search="cb_irfs shoes vhung__phone_20260908_133049__000050.jpg new"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">shoes</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__phone_20260908_133049__000050.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 4</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__phone_20260908_133049__000050.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="CB_IRFS_class4_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="4"
+        data-split="New"
+        data-search="cb_irfs shoes vhung__phone_20260908_133049__000090.jpg new"
+        data-errors="5"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">shoes</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>VHung__phone_20260908_133049__000090.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 1</span>
+
+            <span class="stat fn">FN: 4</span>
+
+            <span class="stat total">
+                Errors: 5
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__phone_20260908_133049__000090.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="CB_IRFS_class4_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="5"
+        data-split="New"
+        data-search="cb_irfs long-sleeved shirt vhung__crowd_20260908_143140__000070.jpg new"
+        data-errors="28"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">long-sleeved shirt</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000070.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 4</span>
+
+            <span class="stat fp">FP: 0</span>
+
+            <span class="stat fn">FN: 28</span>
+
+            <span class="stat total">
+                Errors: 28
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000070.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="CB_IRFS_class5_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="CB_IRFS"
+        data-class="5"
+        data-split="Old"
+        data-search="cb_irfs long-sleeved shirt quochung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg old"
+        data-errors="5"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">CB_IRFS</span>
+                <span class="class-tag">long-sleeved shirt</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 3</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 5
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="CB_IRFS_class5_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="0"
+        data-split="New"
+        data-search="c_irfs hat vhung__crowd_20260908_143140__000220.jpg new"
+        data-errors="7"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">hat</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000220.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 6</span>
+
+            <span class="stat fp">FP: 0</span>
+
+            <span class="stat fn">FN: 7</span>
+
+            <span class="stat total">
+                Errors: 7
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000220.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class0_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="0"
+        data-split="New"
+        data-search="c_irfs hat vhung__phone_20260908_133049__000080.jpg new"
+        data-errors="4"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">hat</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>VHung__phone_20260908_133049__000080.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 3</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 2</span>
+
+            <span class="stat total">
+                Errors: 4
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__phone_20260908_133049__000080.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class0_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="1"
+        data-split="Old"
+        data-search="c_irfs gloves quochung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg old"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">gloves</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 4</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="C_IRFS_class1_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="1"
+        data-split="Old"
+        data-search="c_irfs gloves nhattan__layout_20260908_142002__001430.jpg old"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">gloves</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>NhatTan__layout_20260908_142002__001430.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 1</span>
+
+            <span class="stat fn">FN: 5</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="NhatTan__layout_20260908_142002__001430.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="C_IRFS_class1_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="2"
+        data-split="Old"
+        data-search="c_irfs mask quochung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg old"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">mask</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 3</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="C_IRFS_class2_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="2"
+        data-split="Old"
+        data-search="c_irfs mask quochung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg old"
+        data-errors="4"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">mask</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 2</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 2</span>
+
+            <span class="stat total">
+                Errors: 4
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="C_IRFS_class2_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="3"
+        data-split="New"
+        data-search="c_irfs pants vhung__crowd_20260908_143140__000280.jpg new"
+        data-errors="6"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">pants</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000280.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 3</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 6
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000280.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class3_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="3"
+        data-split="New"
+        data-search="c_irfs pants vhung__crowd_20260908_143140__000370.jpg new"
+        data-errors="5"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">pants</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000370.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 0</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 5
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000370.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class3_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="4"
+        data-split="New"
+        data-search="c_irfs shoes vhung__phone_20260908_133049__000050.jpg new"
+        data-errors="7"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">shoes</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__phone_20260908_133049__000050.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 3</span>
+
+            <span class="stat fn">FN: 4</span>
+
+            <span class="stat total">
+                Errors: 7
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__phone_20260908_133049__000050.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class4_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="4"
+        data-split="New"
+        data-search="c_irfs shoes vhung__phone_20260908_133049__000090.jpg new"
+        data-errors="5"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">shoes</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>VHung__phone_20260908_133049__000090.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 1</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 5
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__phone_20260908_133049__000090.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class4_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="5"
+        data-split="New"
+        data-search="c_irfs long-sleeved shirt vhung__crowd_20260908_143140__000070.jpg new"
+        data-errors="28"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">long-sleeved shirt</span>
+            </div>
+
+            <span class="rank-tag">Rank #1</span>
+
+        </div>
+
+        <h3>VHung__crowd_20260908_143140__000070.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 4</span>
+
+            <span class="stat fp">FP: 0</span>
+
+            <span class="stat fn">FN: 28</span>
+
+            <span class="stat total">
+                Errors: 28
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="VHung__crowd_20260908_143140__000070.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: New</span>
+
+            <a href="#" data-download="C_IRFS_class5_rank1.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+
+    <article
+        class="case-card"
+        data-model="C_IRFS"
+        data-class="5"
+        data-split="Old"
+        data-search="c_irfs long-sleeved shirt quochung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg old"
+        data-errors="5"
+    >
+
+        <div class="card-header">
+
+            <div>
+                <span class="model-tag">C_IRFS</span>
+                <span class="class-tag">long-sleeved shirt</span>
+            </div>
+
+            <span class="rank-tag">Rank #2</span>
+
+        </div>
+
+        <h3>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg</h3>
+
+        <div class="stats">
+
+            <span class="stat tp">TP: 3</span>
+
+            <span class="stat fp">FP: 2</span>
+
+            <span class="stat fn">FN: 3</span>
+
+            <span class="stat total">
+                Errors: 5
+            </span>
+
+        </div>
+
+        <div class="image-container">
+
+            <img
+                src="about:blank"
+                alt="QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg"
+                class="audit-image"
+                loading="lazy"
+                onclick="openImageModal(this)"
+            />
+
+        </div>
+
+        <div class="card-footer">
+
+            <span>Split: Old</span>
+
+            <a href="#" data-download="C_IRFS_class5_rank2.jpg" class="download-link" onclick="downloadCardImage(this); return false;">Download image</a>
+
+        </div>
+
+    </article>
+    
+    </div>
+
+
+    <h2>6. Selected image records</h2>
+
+    <div class="table-wrap">
+        <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>class_id</th>
+      <th>class_name</th>
+      <th>image</th>
+      <th>split</th>
+      <th>rank</th>
+      <th>gt</th>
+      <th>pred</th>
+      <th>tp</th>
+      <th>fp</th>
+      <th>fn</th>
+      <th>errors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>C_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>VHung__crowd_20260908_143140__000220.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>13</td>
+      <td>6</td>
+      <td>6</td>
+      <td>0</td>
+      <td>7</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>VHung__phone_20260908_133049__000080.jpg</td>
+      <td>New</td>
+      <td>2</td>
+      <td>5</td>
+      <td>5</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg</td>
+      <td>Old</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>NhatTan__layout_20260908_142002__001430.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg</td>
+      <td>Old</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>4</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>VHung__crowd_20260908_143140__000280.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>VHung__crowd_20260908_143140__000370.jpg</td>
+      <td>New</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>VHung__phone_20260908_133049__000050.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>5</td>
+      <td>4</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>VHung__phone_20260908_133049__000090.jpg</td>
+      <td>New</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>VHung__crowd_20260908_143140__000070.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>32</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>28</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>C_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>6</td>
+      <td>5</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>VHung__crowd_20260908_143140__000220.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>13</td>
+      <td>6</td>
+      <td>6</td>
+      <td>0</td>
+      <td>7</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>0</td>
+      <td>hat</td>
+      <td>BaoAnh__screen_on_off_20260908_113356__008910.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>1</td>
+      <td>5</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg</td>
+      <td>Old</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>1</td>
+      <td>gloves</td>
+      <td>NhatTan__layout_20260908_142002__001430.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg</td>
+      <td>Old</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>2</td>
+      <td>mask</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>VHung__crowd_20260908_143140__000370.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>3</td>
+      <td>pants</td>
+      <td>VHung__crowd_20260908_143140__000250.jpg</td>
+      <td>New</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>VHung__phone_20260908_133049__000050.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>5</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>4</td>
+      <td>shoes</td>
+      <td>VHung__phone_20260908_133049__000090.jpg</td>
+      <td>New</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>VHung__crowd_20260908_143140__000070.jpg</td>
+      <td>New</td>
+      <td>1</td>
+      <td>32</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>28</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>CB_IRFS</td>
+      <td>5</td>
+      <td>long-sleeved shirt</td>
+      <td>QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg</td>
+      <td>Old</td>
+      <td>2</td>
+      <td>6</td>
+      <td>5</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+
+    <footer>
+
+        Generated from Cell 17L.<br>
+
+        Evaluation: confidence >= 0.40, mask IoU >= 0.50.<br>
+
+        All images are embedded within this HTML file.<br>
+
+        No Internet connection is required.<br><br>
+
+        FP/FN statistics are validation diagnostics,
+        not independent test results.
+
+    </footer>
+
+</div>
+
+
+<div id="imageModal" class="modal">
+
+    <span class="modal-close" onclick="closeImageModal()">
+        &times;
+    </span>
+
+    <img id="modalImage" class="modal-content" />
+
+    <div id="modalCaption" class="modal-caption"></div>
+
+</div>
+
+
+<script>
+
+const modelFilter = document.getElementById("modelFilter");
+
+const classFilter = document.getElementById("classFilter");
+
+const splitFilter = document.getElementById("splitFilter");
+
+const searchInput = document.getElementById("searchInput");
+
+const cards = Array.from(
+    document.querySelectorAll(".case-card")
+);
+
+
+function applyFilters() {
+
+    const modelValue = modelFilter.value;
+
+    const classValue = classFilter.value;
+
+    const splitValue = splitFilter.value;
+
+    const searchValue = searchInput.value.toLowerCase().trim();
+
+    let visible = 0;
+
+    cards.forEach(card => {
+
+        const modelMatch =
+            modelValue === "all"
+            || card.dataset.model === modelValue;
+
+        const classMatch =
+            classValue === "all"
+            || card.dataset.class === classValue;
+
+        const splitMatch =
+            splitValue === "all"
+            || card.dataset.split === splitValue;
+
+        const searchMatch =
+            card.dataset.search.includes(searchValue);
+
+        const show =
+            modelMatch
+            && classMatch
+            && splitMatch
+            && searchMatch;
+
+        card.classList.toggle("hidden", !show);
+
+        if (show) {
+            visible++;
+        }
+
+    });
+
+    document.getElementById("resultCount").textContent =
+        `Showing ${visible} of ${cards.length} cases`;
+
+}
+
+
+modelFilter.addEventListener("change", applyFilters);
+
+classFilter.addEventListener("change", applyFilters);
+
+splitFilter.addEventListener("change", applyFilters);
+
+searchInput.addEventListener("input", applyFilters);
+
+
+function openImageModal(imgElement) {
+
+    const modal = document.getElementById("imageModal");
+
+    const title = imgElement
+        .closest(".case-card")
+        .querySelector("h3")
+        .textContent;
+
+    document.getElementById("modalImage").src =
+        imgElement.src;
+
+    document.getElementById("modalCaption").textContent =
+        title;
+
+    modal.style.display = "block";
+
+}
+
+
+function closeImageModal() {
+
+    document.getElementById("imageModal").style.display =
+        "none";
+
+}
+
+
+document.getElementById("imageModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target.id === "imageModal") {
+            closeImageModal();
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+            closeImageModal();
+        }
+
+    }
+);
+
+
+
+
+function downloadCardImage(link) {
+
+    const card = link.closest(".case-card");
+
+    if (!card) {
+        alert("Cannot find image card.");
+        return;
+    }
+
+    const image = card.querySelector(".audit-image");
+
+    if (!image || !image.src) {
+        alert("Image source is unavailable.");
+        return;
+    }
+
+    const temporaryLink = document.createElement("a");
+
+    temporaryLink.href = image.src;
+
+    temporaryLink.download =
+        link.dataset.download || "overlay.jpg";
+
+    document.body.appendChild(temporaryLink);
+
+    temporaryLink.click();
+
+    temporaryLink.remove();
+}
+
+applyFilters();
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "archive_exists": true,
+  "archive_size_bytes": 3990231435,
+  "archive_size_gb": 3.7162,
+  "member_count": 11692,
+  "zip_integrity": "PASS",
+  "first_bad_file": null,
+  "research_handover_exists": true,
+  "manifest_exists": true
+}
