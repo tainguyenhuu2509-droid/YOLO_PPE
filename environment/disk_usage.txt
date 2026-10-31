@@ -1,0 +1,9 @@
+Filesystem        Size  Used Avail Use% Mounted on
+overlay           8.0T  7.0T  1.1T  88% /
+tmpfs              64M     0   64M   0% /dev
+shm                14G  112K   14G   1% /dev/shm
+/dev/loop2         20G  6.3G   14G  33% /kaggle/lib
+/dev/sda1         122G   12G  111G  10% /opt/bin
+/dev/mapper/snap  8.0T  7.0T  1.1T  88% /etc/hosts
+tmpfs             4.0K     0  4.0K   0% /proc/acpi
+kagglesdsdata     1.0P     0  1.0P   0% /kaggle/input/datasets/deihdi/yolo11-seg-ppe-research

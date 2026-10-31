@@ -1,0 +1,114 @@
+{
+  "class_mapping_used_for_display": {
+    "0": "hat",
+    "1": "gloves",
+    "2": "mask",
+    "3": "pants",
+    "4": "shoes",
+    "5": "long-sleeved shirt"
+  },
+  "total_label_sources": 4768,
+  "warning": "Different source groups may contain duplicate copies of the same labels. Do not sum groups without checking file identity.",
+  "groups": [
+    {
+      "source_type": "input_directory",
+      "label_files": 2384,
+      "empty_label_files": 0,
+      "nonempty_lines": 33985,
+      "valid_polygon_instances": 33985,
+      "class_counts_all_parseable_lines": {
+        "0: hat": 10364,
+        "1: gloves": 3310,
+        "2: mask": 3262,
+        "3: pants": 4260,
+        "4: shoes": 2856,
+        "5: long-sleeved shirt": 9933
+      },
+      "valid_polygon_counts_by_class": {
+        "0: hat": 10364,
+        "1: gloves": 3310,
+        "2: mask": 3262,
+        "3: pants": 4260,
+        "4: shoes": 2856,
+        "5: long-sleeved shirt": 9933
+      },
+      "split_counts": {
+        "train": {
+          "0: hat": 9535,
+          "1: gloves": 3072,
+          "2: mask": 2923,
+          "3: pants": 3814,
+          "4: shoes": 2582,
+          "5: long-sleeved shirt": 9017
+        },
+        "val": {
+          "0: hat": 829,
+          "1: gloves": 238,
+          "2: mask": 339,
+          "3: pants": 446,
+          "4: shoes": 274,
+          "5: long-sleeved shirt": 916
+        }
+      },
+      "quality_checks": {
+        "malformed_lines": 0,
+        "too_few_polygon_points": 0,
+        "odd_coordinate_count": 0,
+        "non_finite_coordinates": 0,
+        "out_of_range_coordinates": 0,
+        "duplicate_lines_within_file": 19
+      },
+      "parse_errors": []
+    },
+    {
+      "source_type": "working_directory",
+      "label_files": 2384,
+      "empty_label_files": 0,
+      "nonempty_lines": 33985,
+      "valid_polygon_instances": 33985,
+      "class_counts_all_parseable_lines": {
+        "0: hat": 10364,
+        "1: gloves": 3310,
+        "2: mask": 3262,
+        "3: pants": 4260,
+        "4: shoes": 2856,
+        "5: long-sleeved shirt": 9933
+      },
+      "valid_polygon_counts_by_class": {
+        "0: hat": 10364,
+        "1: gloves": 3310,
+        "2: mask": 3262,
+        "3: pants": 4260,
+        "4: shoes": 2856,
+        "5: long-sleeved shirt": 9933
+      },
+      "split_counts": {
+        "train": {
+          "0: hat": 9535,
+          "1: gloves": 3072,
+          "2: mask": 2923,
+          "3: pants": 3814,
+          "4: shoes": 2582,
+          "5: long-sleeved shirt": 9017
+        },
+        "val": {
+          "0: hat": 829,
+          "1: gloves": 238,
+          "2: mask": 339,
+          "3: pants": 446,
+          "4: shoes": 274,
+          "5: long-sleeved shirt": 916
+        }
+      },
+      "quality_checks": {
+        "malformed_lines": 0,
+        "too_few_polygon_points": 0,
+        "odd_coordinate_count": 0,
+        "non_finite_coordinates": 0,
+        "out_of_range_coordinates": 0,
+        "duplicate_lines_within_file": 19
+      },
+      "parse_errors": []
+    }
+  ]
+}

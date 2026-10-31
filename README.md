@@ -1,43 +1,45 @@
-# YOLO11 PPE Research Website
+# YOLO11 PPE — COMPACT REPORT EVIDENCE PACK
+
+Created: 2026-10-31T01:25:36.538560+00:00
+
+## Purpose
+
+A compact package containing research evidence for preparing the
+Vietnamese LaTeX report.
 
 ## Contents
 
-- index.html: website homepage and search interface.
-- report.html: original complete report, preserved unchanged.
-- full_text.txt: all extracted visible text.
-- sections.json: section metadata and searchable contents.
-- sections/: individually downloadable section text files.
+- Dataset YAML and metadata.
+- CVAT polygon TXT labels when available.
+- Train/validation/test split lists.
+- Metadata extracted from dataset ZIPs.
+- Training results CSV and configuration.
+- Training logs.
+- Selected training and validation plots.
+- Visual Error Audit text and extracted images.
+- Notebook code history from the current kernel.
+- Runtime environment and GPU information.
+- Annotation statistics.
+- Research handover.
 
-## How to open locally
+## Intentionally excluded
 
-1. Extract `YOLO11_RESEARCH_WEBSITE.zip`.
-2. Open `index.html` in Chrome.
-3. Use the search box to find any research section.
-4. Open `report.html` to view original figures and tables.
+- Original dataset images.
+- Large dataset ZIP files.
+- Model checkpoints and weights.
+- Unnecessary temporary files.
 
-## How to publish online with GitHub Pages
+## Main entry points
 
-1. Create a GitHub repository.
-2. Upload the contents of this website folder into the repository root.
-3. Open Settings > Pages.
-4. Choose Deploy from a branch.
-5. Select the main branch and root folder.
-6. Save and wait for GitHub Pages deployment.
-7. Open the URL provided by GitHub.
+1. `RESEARCH_HANDOVER.md`
+2. `EVIDENCE_PACK_SUMMARY.json`
+3. `annotation_statistics.json`
+4. `training_analysis/training_results_summary.json`
+5. `visual_error_audit/`
+6. `training_visual_evidence/`
+7. `environment/runtime_environment.json`
 
-## Important
-
-This is a static website package.
-Kaggle creates the files but does not automatically host them
-on a public Internet address.
-
-## Source integrity
-
-Original source file:
-YOLO11_COMPLETE_RESEARCH_DOSSIER_20261031_014216.html
-
-Source SHA256:
-a01159032856dc87076c39ad7ca3c9ff476f1d8c0acbdd8cb9c980ee846be98a
-
-Generated:
-2026-10-31T01:49:03.511894+00:00
+IMPORTANT:
+The previous experiment values in RESEARCH_HANDOVER.md are transcribed
+from the user's earlier report draft. Verify them against original
+experiment logs before publishing.

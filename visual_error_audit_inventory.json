@@ -1,0 +1,57 @@
+[
+  {
+    "source": "/kaggle/working/visual_error_audit_report.html",
+    "size_bytes": 22820271,
+    "images_saved": [
+      "001_VHung__crowd_20260908_143140__000220.jpg",
+      "002_BaoAnh__screen_on_off_20260908_113356__008910.jpg",
+      "003_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg",
+      "004_NhatTan__layout_20260908_142002__001430.jpg",
+      "005_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg",
+      "006_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg",
+      "007_VHung__crowd_20260908_143140__000370.jpg",
+      "008_VHung__crowd_20260908_143140__000250.jpg",
+      "009_VHung__phone_20260908_133049__000050.jpg",
+      "010_VHung__phone_20260908_133049__000090.jpg",
+      "011_VHung__crowd_20260908_143140__000070.jpg",
+      "012_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg",
+      "013_VHung__crowd_20260908_143140__000220.jpg",
+      "014_VHung__phone_20260908_133049__000080.jpg",
+      "015_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg",
+      "016_NhatTan__layout_20260908_142002__001430.jpg",
+      "017_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg",
+      "018_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg",
+      "019_VHung__crowd_20260908_143140__000280.jpg",
+      "020_VHung__crowd_20260908_143140__000370.jpg",
+      "021_VHung__phone_20260908_133049__000050.jpg",
+      "022_VHung__phone_20260908_133049__000090.jpg",
+      "023_VHung__crowd_20260908_143140__000070.jpg",
+      "024_QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg"
+    ],
+    "status": "processed",
+    "image_tags": 25,
+    "unique_images_saved": 24,
+    "visible_text_file": "audit_visible_text.txt",
+    "sanitized_html": "audit_sanitized.html"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/visual_error_audit_report.html",
+    "size_bytes": 45577643,
+    "images_saved": [],
+    "status": "processed",
+    "image_tags": 25,
+    "unique_images_saved": 0,
+    "visible_text_file": "audit_visible_text.txt",
+    "sanitized_html": "audit_sanitized.html"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/research_experiments/confidence_threshold_analysis_extended/html_visual_audit/visual_error_audit_report_compact.html",
+    "size_bytes": 22820271,
+    "images_saved": [],
+    "status": "processed",
+    "image_tags": 25,
+    "unique_images_saved": 0,
+    "visible_text_file": "audit_visible_text.txt",
+    "sanitized_html": "audit_sanitized.html"
+  }
+]

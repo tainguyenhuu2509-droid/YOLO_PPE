@@ -1,0 +1,362 @@
+[
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001260.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001260.jpg",
+    "size_bytes": 233679,
+    "sha256_original": "e22c42d04ea81c1e5b6ad09d857b7a442bbddbfeaa5168e68940a80c662a449c"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001400.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001400.jpg",
+    "size_bytes": 208642,
+    "sha256_original": "83f9a6a060933c5e70511d8f80c81f9c421658860472e70168be5a7ca3998d77"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000110.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000110.jpg",
+    "size_bytes": 249101,
+    "sha256_original": "892eda9aa28396b5066c281b7377aff14f133d175ef7e0f498f49cd4727a642b"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000010.jpg",
+    "size_bytes": 275891,
+    "sha256_original": "f8dc15f2465eff03790321188030976430465017c75b63a2106dec700bb795a8"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001100.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001100.jpg",
+    "size_bytes": 257152,
+    "sha256_original": "0af77a96856a25027f258ba1bd0a7778b7c495724c2be439c87fb9341d25d55f"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001550.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001550.jpg",
+    "size_bytes": 188458,
+    "sha256_original": "0f6e280e1b0b7c7475c9098ae0b3bb869dd41df6da8f569882e3b64e0e86f77e"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008840.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008840.jpg",
+    "size_bytes": 211393,
+    "sha256_original": "72e8008857fa023dc58718fd2becc946e7b07e18d8088a19989003236a67c9dc"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001090.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001090.jpg",
+    "size_bytes": 247796,
+    "sha256_original": "8a617ca42d43ad8e9e92030787a9eef539a66575c61fd8723b6183177a3bc9b7"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001170.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001170.jpg",
+    "size_bytes": 230145,
+    "sha256_original": "fcaa081826988ed993148621d94b129d5af0614acf2b2e52637d584ea98f93cc"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008910.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008910.jpg",
+    "size_bytes": 228705,
+    "sha256_original": "c885330bb15be979906a4a83340c64c05acccbcbfe3cd769a72553df15dcc6f5"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000890.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000890.jpg",
+    "size_bytes": 251071,
+    "sha256_original": "f199e4711ebcda9e316ad9bac347e11d45da7364dbd8723b2010e6520f10b36c"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001330.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001330.jpg",
+    "size_bytes": 235919,
+    "sha256_original": "13ca602f7debdb888424295c04c06d06d3fcab3c33e3ee22c1253d522552ed0b"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001220.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001220.jpg",
+    "size_bytes": 265567,
+    "sha256_original": "29648d150912f6a6b9fd1afef8e64cb878a06918a38dff7492cc0d742487d7e6"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001080.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001080.jpg",
+    "size_bytes": 250911,
+    "sha256_original": "0e16914f089115688a9a3422410ca4699cb07ce2e05911d48858b2f5f9a2ecc1"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001620.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001620.jpg",
+    "size_bytes": 264031,
+    "sha256_original": "7d7df9d6f8d203c92335dbfb20c46f2592fc9b47b2e29d7b93db67678d7daabd"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000930.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000930.jpg",
+    "size_bytes": 206033,
+    "sha256_original": "33bd2fb2c6f6eda1c0e6097af83208b563c4e745562790a6fd1ba927897ec4a4"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001410.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001410.jpg",
+    "size_bytes": 222860,
+    "sha256_original": "a797a0462cb1f7ee39f9d1630c3c94ee8982b4d68300477b0cc8b16f63f8ce62"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000130.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000130.jpg",
+    "size_bytes": 250956,
+    "sha256_original": "00bdbf1adcb7ce5e5780f70d0268fbdd1baa39ca300b8e7208dad69c9ef7ed6a"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000040.jpg",
+    "size_bytes": 259964,
+    "sha256_original": "30c792d2efbcb1fd80921863cf57b025451ab76467e7f12a7bdca39052a3815b"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000880.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000880.jpg",
+    "size_bytes": 255709,
+    "sha256_original": "b351c9eb4db456c0835cf7260dc2dabf798e6db98defb3d12e44a9c1f8d2a8e8"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001480.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001480.jpg",
+    "size_bytes": 243600,
+    "sha256_original": "da9d6029908a84add558753b873abef2e8f713261311262b97c96e29e1ef6b7e"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000120.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000120.jpg",
+    "size_bytes": 251041,
+    "sha256_original": "a13d252ae011aa7b8e0bd37c75092cb6dfef1c0240c9ad52c7dfa1b55c2b4767"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000520.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000520.jpg",
+    "size_bytes": 215895,
+    "sha256_original": "89af3a05e66a1b5afdb2c95b37639f9f2410c7e203dc6ee03900e8dd251e95e1"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000020.jpg",
+    "size_bytes": 273603,
+    "sha256_original": "abb71a076992f0c18ab2974d2ad7ce9e9cc3f960f0d230ff4f790c116b41bce7"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000550.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000550.jpg",
+    "size_bytes": 184016,
+    "sha256_original": "b6da35d98e59cd2f85b03b596bb17af84ca61970502a34ed503e59cecb1e54ec"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001450.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001450.jpg",
+    "size_bytes": 248363,
+    "sha256_original": "f13f4e2f84e742e7f97cd6cdb71a94446031b7884d45e0c75745552304acdb98"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000910.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000910.jpg",
+    "size_bytes": 232693,
+    "sha256_original": "75bb7600e9f7cb3669fa0693038bc7d824b9d138ee41ab0b45861168b38e9a64"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001130.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001130.jpg",
+    "size_bytes": 251119,
+    "sha256_original": "8879229625f70efcb3b900adfdf0473eb260e329f28d440669f87833bb162e58"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000240.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000240.jpg",
+    "size_bytes": 286241,
+    "sha256_original": "f4558f18e495ead4906c585e60f0ca8c99950f73860dbd45cb9b22478870a584"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001630.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001630.jpg",
+    "size_bytes": 273404,
+    "sha256_original": "44fe45d2abb5f8dcd19ca7ec37c75f60008f0ede265136e322b5235b5c9c1d16"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008830.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008830.jpg",
+    "size_bytes": 214544,
+    "sha256_original": "526349d321b39bf6fa96bd3fcf6a47889fd173095cc8b2e74b52e02987cdefba"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000970.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000970.jpg",
+    "size_bytes": 198278,
+    "sha256_original": "3864c96c93328ac5f13d532690935fb450f7ba3f4d7484e6120a2107942f4b0d"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001110.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001110.jpg",
+    "size_bytes": 257162,
+    "sha256_original": "099964ac0292795b0a9098e1bfd95d41d0e0d45cde840d1d0021b679d24c69e1"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000210.jpg",
+    "size_bytes": 268439,
+    "sha256_original": "e057b489a3d04b1a350538fe789b48de2a0fbc37435bc3fd82f5d448eef62cb3"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000220.jpg",
+    "size_bytes": 274543,
+    "sha256_original": "7cc0fd0014d3a2f424e0e3e57ae001c7d6ecb8c3bcce25c7c5fe1dca131b7b8f"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000500.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000500.jpg",
+    "size_bytes": 216625,
+    "sha256_original": "c1b0f105bc2510727f9398b85f952f9cf1900e3a7384a904120a0f35236b7b1d"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000070.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000070.jpg",
+    "size_bytes": 238654,
+    "sha256_original": "e028be58fd0849bd97603290b4863545c66914f1ab0de0a84d50fd35a8eb6761"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000100.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000100.jpg",
+    "size_bytes": 246430,
+    "sha256_original": "d6f2d63a5f90300ba3ea5188cd69755fc0c5d2f1fc6196be63a2c59215358e7d"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000680.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000680.jpg",
+    "size_bytes": 195239,
+    "sha256_original": "982a901a4cdd21b3b49c5a00b983028edc4a5b83cc28bdaa958c95d0cc0f1ed4"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001350.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001350.jpg",
+    "size_bytes": 235416,
+    "sha256_original": "5d81f994d06ed4125f521c313f934815ab2d47a552c6611b74f823b9443af4d6"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001420.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001420.jpg",
+    "size_bytes": 202418,
+    "sha256_original": "26aaff7f8a23be12b7ff1afac1368e4d1c9900daf176042943f2edeb068a8cfa"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001010.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001010.jpg",
+    "size_bytes": 232190,
+    "sha256_original": "892557289a71c15faeed3dd2ce6b31f3504be7d2a472222aa144fbd970c4f750"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000690.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000690.jpg",
+    "size_bytes": 207424,
+    "sha256_original": "4f01506f6cc7dad968bade4aff57b25e0c90328bc243958f38ccb2d82d2a9c1c"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000170.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000170.jpg",
+    "size_bytes": 256593,
+    "sha256_original": "3ff919efc834bdbb11e8da417e81e880bc1aee2281c448c5dede177fdba96bbd"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000870.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000870.jpg",
+    "size_bytes": 244132,
+    "sha256_original": "e26ac5a9d8d5b5b9115d54479b002f8d147f8bb6e5b0db0aa5091b0f3cd9f02f"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001230.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001230.jpg",
+    "size_bytes": 262380,
+    "sha256_original": "be7b549ad9851c456862a3be48d75526604cd18171d39b1b182d9b8a36bf9bae"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000230.jpg",
+    "size_bytes": 281893,
+    "sha256_original": "c741516900a20405f0583fab700ae6ec2a66709aae18cbe6234b82e49c1237af"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008870.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008870.jpg",
+    "size_bytes": 214034,
+    "sha256_original": "f860035062b6314e19449e1d1e8478e1cb46ab1fbed33b8209d639fddb757663"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008890.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008890.jpg",
+    "size_bytes": 223375,
+    "sha256_original": "25b1dce8b1c8ee8c76c12f1cf19ccb8059bfcfcad32e8d01c8575fc8866f7ecd"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000250.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000250.jpg",
+    "size_bytes": 283371,
+    "sha256_original": "177cdfdf06fb90020b9f8465c52097bcdff50e885ba193f47a52f4b78dabe191"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001270.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001270.jpg",
+    "size_bytes": 221173,
+    "sha256_original": "75fc6a81d09d3778f67160ec21903243726a03814e9325295fb217e6fd293de0"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/QuocHung__screen_on_off_outdoor_pm_20260908_130658__000000.jpg",
+    "saved_as": "QuocHung__screen_on_off_outdoor_pm_20260908_130658__000000.jpg",
+    "size_bytes": 273608,
+    "sha256_original": "1a31106826440b0a450502b6fcb12e70f7485076b76fe07b341532c5f8a24d28"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000710.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000710.jpg",
+    "size_bytes": 259125,
+    "sha256_original": "23920e5b59eaa26c5b0de45f8c9c39efc9b2e898ff83db5f8b5ea1145e3abbc5"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000950.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000950.jpg",
+    "size_bytes": 202604,
+    "sha256_original": "5a53a454f7a5a6d259229dfddef28547ff58640ddaad593e9b6b5b411a1cee3a"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001600.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001600.jpg",
+    "size_bytes": 243234,
+    "sha256_original": "339e38becd6cd6ee35bc734a68a45e943ff6f05218a5b0a7b0d97741b16d22bb"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008860.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008860.jpg",
+    "size_bytes": 210490,
+    "sha256_original": "3a45f1a342dfb360017073871f8a5c430c6883800a1567623acefceec78802bd"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008880.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008880.jpg",
+    "size_bytes": 220521,
+    "sha256_original": "492a730ef4a8b1550928d12121787edb7a74a91323a0c8b893eaeda23d570f2a"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__000700.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__000700.jpg",
+    "size_bytes": 232250,
+    "sha256_original": "f3ac48404411621647457ce34ec77741ee78828c88a5fd947d94fbee7924d279"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/BaoAnh__screen_on_off_20260908_113356__008850.jpg",
+    "saved_as": "BaoAnh__screen_on_off_20260908_113356__008850.jpg",
+    "size_bytes": 207844,
+    "sha256_original": "828d9dcb7bd52b3026cba6e3345e09f4dcf69b4194ec823e7c8c201d706aa5e0"
+  },
+  {
+    "source": "/kaggle/working/YOLO11_seg_expanded/dataset/images/val/old/NhatTan__layout_20260908_142002__001290.jpg",
+    "saved_as": "NhatTan__layout_20260908_142002__001290.jpg",
+    "size_bytes": 234550,
+    "sha256_original": "f07f3b62e43e7e86f43f0578661d5032e31203de6439ae9e8e234d16d3122cf2"
+  }
+]

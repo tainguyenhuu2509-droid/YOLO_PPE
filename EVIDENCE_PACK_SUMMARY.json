@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-10-31T01:25:36.538560+00:00",
+  "archive_name": "YOLO11_REPORT_EVIDENCE_20261031_012443.zip",
+  "source_files_included": 5014,
+  "annotation_files_found": 4768,
+  "audit_reports_processed": 3,
+  "audit_images_extracted": 24,
+  "selected_plots": 60,
+  "training_csvs_summarized": 17,
+  "dataset_zip_archives_inspected": 0,
+  "notebook_history": {
+    "captured": true,
+    "input_cells": 45,
+    "output_objects": 0,
+    "note": "Only current kernel In/Out. It cannot recover outputs from previous sessions or every frontend display."
+  },
+  "excluded_weights": 6,
+  "excluded_raw_images": 3552,
+  "excluded_large_text_files": 0,
+  "statistics": {
+    "input_metadata_files": 2472,
+    "working_evidence_files": 2542,
+    "annotation_files": 4768,
+    "plot_images": 60,
+    "audit_reports": 3,
+    "audit_images": 24,
+    "excluded_weights": 6,
+    "excluded_raw_images": 3552,
+    "excluded_large_text_files": 0
+  },
+  "important_note": "Compact evidence package, not a complete training backup."
+}

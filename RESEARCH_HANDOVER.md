@@ -1,0 +1,391 @@
+# YOLO11 PPE INSTANCE SEGMENTATION — RESEARCH HANDOVER
+
+## 1. Project objective
+
+The research project investigates YOLO11 instance segmentation on a
+PPE dataset containing six classes.
+
+The workflow includes:
+- CVAT instance annotation.
+- Polygon annotation export.
+- Dataset quality control.
+- Train/validation split preparation.
+- YOLO11-seg baseline training.
+- Resolution changes and fine-tuning.
+- Copy-Paste augmentation.
+- Class-aware oversampling.
+- Quantitative evaluation.
+- Visual error analysis.
+
+This package is a compact evidence package for report preparation.
+It does not contain the original image dataset or model checkpoints.
+
+## 2. Class mapping previously supplied
+
+| Class ID | Class |
+|---|---|
+| 0 | hat |
+| 1 | gloves |
+| 2 | mask |
+| 3 | pants |
+| 4 | shoes |
+| 5 | long-sleeved shirt |
+
+The class mapping should be checked against the actual `data.yaml`.
+
+## 3. Dataset information previously recorded
+
+The research notes previously reported:
+
+- job54.zip: 297 images.
+- job62.zip: 298 images.
+- Combined dataset: 595 unique images.
+- Train: 476 images.
+- Validation: 119 images.
+- Train instances: 6,455.
+- Validation instances: 1,434.
+- Total instances: 7,889.
+
+These values are transcribed from the earlier report draft.
+They should be verified against the actual files in this evidence package.
+
+### Previously reported class distribution
+
+| Class | Train | Validation | Total |
+|---|---:|---:|---:|
+| hat | 2064 | 365 | 2429 |
+| gloves | 688 | 182 | 870 |
+| mask | 692 | 184 | 876 |
+| pants | 700 | 166 | 866 |
+| shoes | 393 | 126 | 519 |
+| long-sleeved shirt | 1918 | 411 | 2329 |
+| Total | 6455 | 1434 | 7889 |
+
+Shoes is the class with the fewest reported instances.
+
+## 4. Dataset split methodology
+
+The previous report describes splitting by recording session
+rather than randomly splitting adjacent frames.
+
+This is intended to reduce leakage caused by near-duplicate frames.
+
+Reported split:
+
+Train:
+- BaoAnh__screen_on_off_outdoor_pm_20260908_130620: 43 images
+- BaoAnh__screen_on_off_outdoor_pm_20260908_131056: 26 images
+- NhatTan__crowd_20260908_143116: 45 images
+- NhatTan__layout_20260908_142209: 90 images
+- QuocHung__phone_20260908_133350: 38 images
+- QuocHung__screen_on_off_outdoor_pm_20260908_130802: 63 images
+- QuocHung__screen_on_off_outdoor_pm_20260908_130831: 171 images
+
+Validation:
+- BaoAnh__screen_on_off_20260908_113356: 11 images
+- NhatTan__layout_20260908_142002: 82 images
+- QuocHung__screen_on_off_outdoor_pm_20260908_130658: 26 images
+
+These session names and counts are from the earlier report draft.
+Verify against train.txt and val.txt before publication.
+
+## 5. Annotation quality control previously reported
+
+Earlier notes mention:
+- Two unannotated frames were accepted.
+- One image contained two polygons that were identical.
+- The duplicate polygon was corrected.
+- A TXT file was missing in an earlier export and was subsequently
+  investigated through CVAT.
+
+An additional validation annotation issue was recorded in:
+`NhatTan__layout_20260908_142002__001090.txt`
+
+The file was reported to contain 17 nonempty lines but only 16 unique
+lines. This was corrected and the validation set was reported to contain
+1,434 instances.
+
+These observations must be reconciled with the archived labels.
+
+## 6. Baseline experiment — 640 px
+
+Previously reported configuration:
+
+- Model: YOLO11s-seg.
+- Image size: 640.
+- Batch: 8.
+- Maximum epochs: 100.
+- Patience: 25.
+- Optimizer: Auto.
+- Seed: 42.
+- Deterministic: enabled.
+- AMP: enabled.
+- Workers: 2.
+- Mosaic: 0.8.
+- MixUp: 0.
+- Close Mosaic: 10.
+- Additional augmentation: blur/motion blur, brightness/contrast,
+  and Gaussian noise.
+
+The baseline reportedly stopped after 49 epochs.
+Best checkpoint: epoch 24.
+
+| Metric | Box | Mask |
+|---|---:|---:|
+| Precision | 77.4% | 77.1% |
+| Recall | 56.1% | 55.0% |
+| mAP50 | 62.2% | 60.5% |
+| mAP50-95 | 37.9% | 34.8% |
+
+These figures are transcribed from the previous report draft.
+
+## 7. Resolution and fine-tuning experiments
+
+Previously reported records:
+
+| Experiment | Mask P | Mask R | Mask mAP50 | Mask mAP50-95 |
+|---|---:|---:|---:|---:|
+| Baseline 640 | 77.1% | 55.0% | 60.5% | 34.8% |
+| Baseline checkpoint evaluated at 960 | 72.7% | 57.3% | 64.2% | 37.1% |
+| Fine-tune 960, training log | 80.8% | 63.5% | 68.8% | 40.8% |
+| Fine-tune 960, reevaluation | 80.4% | 63.5% | 68.6% | 40.3% |
+| Fine-tune 960 checkpoint evaluated at 1280 | 79.1% | 62.0% | 68.8% | 42.4% |
+| Separate home_finetune run | 75.0% | 63.9% | 67.8% | 39.9% |
+
+Important distinction:
+- Evaluating a fixed checkpoint at another resolution does not update
+  the model's weights.
+- Fine-tuning updates the weights.
+- Results from separate checkpoints or environments should not
+  automatically be merged.
+
+## 8. E1, E2 and E3 — sequential 1280 px fine-tuning
+
+Previously reported shared setup:
+- YOLO11s-seg.
+- GPU: NVIDIA Tesla T4.
+- Image size: 1280.
+- Batch size: 2.
+- Optimizer: AdamW.
+- Initial learning rate: 0.0003.
+- Final learning-rate factor: 0.01.
+- Warmup epochs: 2.
+- Weight decay: 0.0005.
+- Seed: 42.
+- AMP: enabled.
+- Workers: 2.
+- Mosaic: 0.40.
+- MixUp: 0.
+- Close Mosaic: 8.
+
+### E1
+
+- 1280 px.
+- Copy-Paste disabled.
+- No additional class-aware oversampling.
+- Reported run length: 25 epochs.
+- Best checkpoint: epoch 13.
+
+### E2
+
+- Initialized from E1 best checkpoint.
+- Copy-Paste = 0.10.
+- Copy-Paste mode = mixup.
+- Standard MixUp = 0.
+- Reported run length: 17 epochs.
+- Best checkpoint: epoch 7.
+
+### E3
+
+- Initialized from E2 best checkpoint.
+- Copy-Paste = 0.10.
+- Shoes images were repeated twice in the train list.
+- Half of the gloves-only images were repeated once.
+- Validation split remained unchanged.
+- Reported run length: 15 epochs.
+- Best checkpoint: epoch 5.
+
+### Overall results reported in the previous draft
+
+| Metric | E1 | E2 | E3 |
+|---|---:|---:|---:|
+| Box Precision | 83.8% | 80.8% | 81.8% |
+| Box Recall | 61.7% | 61.7% | 63.7% |
+| Box mAP50 | 69.7% | 69.7% | 71.7% |
+| Box mAP50-95 | 45.3% | 44.8% | 47.4% |
+| Mask Precision | 84.7% | 83.3% | 80.8% |
+| Mask Recall | 62.7% | 63.2% | 66.8% |
+| Mask mAP50 | 70.7% | 70.9% | 73.4% |
+| Mask mAP50-95 | 44.2% | 44.5% | 45.5% |
+
+### E1 per-class mask metrics
+
+| Class | P | R | mAP50 | mAP50-95 |
+|---|---:|---:|---:|---:|
+| hat | 91.2% | 71.1% | 84.4% | 56.2% |
+| gloves | 80.3% | 48.4% | 54.5% | 33.7% |
+| mask | 80.9% | 70.7% | 74.6% | 36.6% |
+| pants | 84.0% | 63.3% | 73.9% | 52.1% |
+| shoes | 78.7% | 48.4% | 53.0% | 23.1% |
+| long-sleeved shirt | 93.0% | 74.2% | 84.1% | 63.5% |
+
+### E2 per-class mask metrics
+
+| Class | P | R | mAP50 | mAP50-95 |
+|---|---:|---:|---:|---:|
+| hat | 92.5% | 72.9% | 86.7% | 57.3% |
+| gloves | 76.1% | 48.9% | 57.6% | 35.7% |
+| mask | 87.3% | 68.5% | 73.3% | 36.6% |
+| pants | 78.9% | 65.7% | 72.4% | 50.9% |
+| shoes | 76.4% | 46.8% | 53.1% | 23.0% |
+| long-sleeved shirt | 88.9% | 76.2% | 82.6% | 63.8% |
+
+### E3 per-class mask metrics
+
+| Class | P | R | mAP50 | mAP50-95 |
+|---|---:|---:|---:|---:|
+| hat | 84.5% | 81.8% | 87.1% | 56.8% |
+| gloves | 71.8% | 51.6% | 60.3% | 37.0% |
+| mask | 76.8% | 71.7% | 73.4% | 35.9% |
+| pants | 82.6% | 69.9% | 79.1% | 53.1% |
+| shoes | 78.9% | 50.6% | 54.9% | 25.2% |
+| long-sleeved shirt | 90.3% | 75.1% | 85.6% | 64.7% |
+
+All E1-E3 values above are transcribed from the supplied report draft.
+They must be compared against the archived CSVs and validation outputs.
+
+## 9. Preliminary E1-E3 interpretation
+
+E3 has the highest reported:
+- Mask mAP50: 73.4%.
+- Mask mAP50-95: 45.5%.
+- Mask recall: 66.8%.
+
+However:
+- E3 mask precision is 80.8%, lower than E1 at 84.7%.
+- Shoes remains the weakest class by mask mAP50-95.
+- Gloves recall improves only to 51.6%.
+- Mask mAP50-95 decreases from E1/E2 to E3.
+
+E2 is initialized from E1, and E3 from E2.
+This is sequential fine-tuning, not a fully controlled ablation.
+
+It is therefore not valid to attribute all E3 improvements solely
+to oversampling.
+
+A controlled comparison should restart all branches from the
+same initial checkpoint and change one augmentation factor at a time.
+
+## 10. Separate Visual Error Audit: CB_IRFS vs C_IRFS
+
+A previously inspected HTML audit was described as containing:
+- 268 validation images.
+- 3,042 ground-truth instances.
+- Confidence threshold: 0.40.
+- Mask IoU threshold: 0.50.
+- 6 classes.
+- 24 overlays and 16 unique image names.
+- Model identifiers: CB_IRFS and C_IRFS.
+
+Previously reported metrics:
+
+| Metric | CB_IRFS | C_IRFS |
+|---|---:|---:|
+| TP | 2201 | 2223 |
+| FP | 273 | 296 |
+| FN | 841 | 819 |
+| Precision | 0.8897 | 0.8825 |
+| Recall | 0.7235 | 0.7308 |
+| F1 | 0.7980 | 0.7995 |
+
+Interpretation:
+- C_IRFS has a slightly higher F1.
+- The absolute difference is 0.0015.
+- CB_IRFS has fewer false positives.
+- C_IRFS has fewer false negatives.
+- Neither model can be declared clearly superior from this
+  small F1 difference alone.
+
+This audit is a separate comparison.
+Do not merge it with E1-E3 unless the exact checkpoints,
+validation data and evaluation protocol establish their relationship.
+
+The audit figures must be checked against the original HTML.
+
+## 11. Scientific limitations
+
+- A validation set is not an independent test set.
+- Repeated configuration selection using the same validation set
+  can lead to optimistic performance estimates.
+- One split is not sufficient to prove robust generalization.
+- Sequential fine-tuning does not isolate causal contributions
+  of individual augmentation methods.
+- A higher mAP does not guarantee better operational performance
+  under every false-positive/false-negative cost.
+- Per-class errors should be inspected visually.
+- Annotation errors may affect both training and validation.
+- Class imbalance is a plausible issue, but should be connected
+  to observed per-class errors before claiming it as the cause.
+
+## 12. Evidence package contents
+
+`input_metadata/`
+    YAML, JSON, CSV, split TXT and annotation files from Kaggle input.
+
+`annotations_from_dataset_archives/`
+    Annotation TXT, data.yaml and split lists extracted from CVAT ZIPs.
+    Original images are not extracted.
+
+`working_evidence/`
+    Training logs, configs, results CSV, code and experiment metadata.
+
+`training_visual_evidence/`
+    Selected training curves, confusion matrices, validation and prediction
+    images, compressed for report use.
+
+`visual_error_audit/`
+    Audit visible text, sanitized HTML and extracted embedded images.
+
+`training_analysis/`
+    Automatically summarized results.csv files.
+
+`annotation_statistics.json`
+    Polygon statistics and basic coordinate validity checks.
+
+`notebook_history/`
+    Code inputs and outputs still accessible in the current kernel.
+
+`environment/`
+    Python, package versions, CUDA, GPU and system information.
+
+## 13. Important distinction between evidence and reported values
+
+The experiment tables in this document were transcribed from the
+previously supplied LaTeX draft.
+
+They are not independently measured by this evidence pack.
+
+For the final report:
+1. Compare the values with original results.csv files.
+2. Check args.yaml for each run.
+3. Inspect the audit HTML for its separate model comparison.
+4. Check the dataset split lists.
+5. Explain discrepancies rather than silently selecting the
+   most favorable value.
+
+## 14. Recommended final report organization
+
+1. Introduction and research objective.
+2. Dataset collection and CVAT annotation.
+3. Annotation format and quality control.
+4. Class distribution and train/validation splitting.
+5. YOLO11-seg architecture and methodology.
+6. Baseline at 640 px.
+7. Resolution experiments and 960 px fine-tuning.
+8. 1280 px sequential experiments E1-E3.
+9. Overall and per-class results.
+10. Visual error audit.
+11. Discussion and limitations.
+12. Conclusion and future experiments.
+
+END OF RESEARCH HANDOVER.
