@@ -1,0 +1,16 @@
+{
+  "website_name": "YOLO11 PPE Research Portal",
+  "generated_at": "2026-10-31T01:49:03.511894+00:00",
+  "source_file": "YOLO11_COMPLETE_RESEARCH_DOSSIER_20261031_014216.html",
+  "source_path": "/kaggle/working/YOLO11_COMPLETE_RESEARCH_DOSSIER_20261031_014216.html",
+  "source_sha256": "a01159032856dc87076c39ad7ca3c9ff476f1d8c0acbdd8cb9c980ee846be98a",
+  "source_size_bytes": 9003635,
+  "sections": 10,
+  "total_words": 125146,
+  "total_characters": 8844187,
+  "website_pages": [
+    "index.html",
+    "report.html"
+  ],
+  "section_text_directory": "sections/"
+}
